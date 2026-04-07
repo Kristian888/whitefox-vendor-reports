@@ -1,0 +1,27 @@
+{
+  "WF001": {
+    "address": "6/152 Jefferson Lane, Palm Beach",
+    "propertyType": "Apartment",
+    "bedrooms": "2",
+    "bathrooms": "2", 
+    "parking": "1",
+    "landSize": "N/A (Strata)",
+    "marketValue": "$2,000,000",
+    "overview": "Premium 2-bedroom apartment in prestigious Jefferson Lane precinct. Features modern appointments, stunning views, and excellent lifestyle amenities in the heart of Palm Beach.",
+    "marketAnalysis": "Our analysis of recent sales in the Jefferson Lane precinct shows strong demand for quality 2-bedroom apartments. Based on comparable properties, we recommend a strategic pricing approach of $2,000,000 to maximize interest and achieve the best possible outcome. Recent sales range from $1,750,000 to $1,920,000 for similar properties.",
+    "buyerFeedback": "Based on 35 inspections and enquiries, we have compiled comprehensive feedback. 65% provided positive feedback on location, presentation, and lifestyle offering. 23% raised price concerns, indicating room for negotiation. Strong market response positions us well for a successful campaign.",
+    "marketingStrategy": "Recommended 4-6 week campaign targeting both owner-occupiers and premium investors. Comprehensive digital marketing across Domain, realestate.com.au, and social media channels. Professional photography and virtual tours to maximize online engagement. Strategic pricing at $2,000,000 allows negotiation flexibility while maximizing market interest.",
+    "nextSteps": [
+      "Review and approve marketing strategy",
+      "Schedule professional photography session", 
+      "Launch comprehensive marketing campaign",
+      "Weekly progress reports and feedback analysis"
+    ],
+    "comparables": [
+      {"address": "5/148 Jefferson Lane", "beds": 2, "baths": 2, "cars": 1, "price": "$1,850,000", "date": "Nov 2025"},
+      {"address": "3/156 Jefferson Lane", "beds": 2, "baths": 2, "cars": 1, "price": "$1,920,000", "date": "Dec 2025"},
+      {"address": "7/150 Jefferson Lane", "beds": 2, "baths": 1, "cars": 1, "price": "$1,750,000", "date": "Oct 2025"}
+    ],
+    "timestamp": "2026-04-07T13:18:00.000Z"
+  }
+}

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHITEFOX Vendor Reports - Property Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Admin Panel (Hidden by default) -->
+    <div id="admin-panel" class="admin-panel" style="display: none;">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h2>🦊 WHITEFOX Vendor Report Generator</h2>
+                <button id="close-admin" class="close-btn">×</button>
+            </div>
+            
+            <div class="form-section">
+                <h3>Property Information</h3>
+                <input type="text" id="property-address" placeholder="Property Address" />
+                <input type="text" id="unique-code" placeholder="Unique Report Code (e.g., WF001)" />
+            </div>
+            
+            <div class="form-section">
+                <h3>Video Upload</h3>
+                <input type="file" id="property-video" accept="video/*" />
+                <small>Upload property video for header loop</small>
+            </div>
+            
+            <div class="form-section">
+                <h3>Property Data (Copy from AI extraction)</h3>
+                <textarea id="property-overview" placeholder="Property Overview data..."></textarea>
+                <textarea id="market-analysis" placeholder="Market Analysis data..."></textarea>
+                <textarea id="buyer-feedback" placeholder="Buyer Feedback data..."></textarea>
+                <textarea id="marketing-strategy" placeholder="Marketing Strategy data..."></textarea>
+            </div>
+            
+            <button id="generate-report" class="generate-btn">Generate Vendor Report</button>
+            <div id="generated-link" class="generated-link"></div>
+        </div>
+    </div>
+
+    <!-- Main Landing Page -->
+    <div class="container">
+        <!-- Video Header -->
+        <div class="video-header">
+            <video id="property-video-display" autoplay muted loop>
+                <source src="sample-property.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay">
+                <div class="logo-container">
+                    <img src="whitefox-logo.png" alt="WHITEFOX Real Estate" class="logo">
+                </div>
+                <div class="property-title">
+                    <h1 id="property-title-text">Your Premium Property Report</h1>
+                    <p id="property-subtitle">Comprehensive Market Analysis & Strategy</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report Content -->
+        <div class="report-content">
+            
+            <!-- Executive Summary -->
+            <section class="report-section">
+                <h2 class="section-header">📊 Executive Summary</h2>
+                <div class="summary-card">
+                    <p class="summary-text" id="executive-summary">
+                        Your property represents an exceptional opportunity in the premium market. 
+                        Based on our comprehensive analysis, we recommend a strategic approach to achieve 
+                        the best possible outcome for your sale.
+                    </p>
+                    <div class="highlight-box">
+                        <span class="price-recommendation" id="price-recommendation">Market Value: Contact for Assessment</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Property Overview -->
+            <section class="report-section">
+                <h2 class="section-header">🏠 Property Overview</h2>
+                <div class="property-grid" id="property-overview-content">
+                    <div class="property-item">
+                        <span class="label">Address:</span>
+                        <span class="value" id="prop-address">Your Property Address</span>
+                    </div>
+                    <div class="property-item">
+                        <span class="label">Type:</span>
+                        <span class="value" id="prop-type">Property Type</span>
+                    </div>
+                    <div class="property-item">
+                        <span class="label">Bedrooms:</span>
+                        <span class="value" id="prop-bedrooms">-</span>
+                    </div>
+                    <div class="property-item">
+                        <span class="label">Bathrooms:</span>
+                        <span class="value" id="prop-bathrooms">-</span>
+                    </div>
+                    <div class="property-item">
+                        <span class="label">Parking:</span>
+                        <span class="value" id="prop-parking">-</span>
+                    </div>
+                    <div class="property-item">
+                        <span class="label">Land Size:</span>
+                        <span class="value" id="prop-landsize">-</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Market Analysis -->
+            <section class="report-section">
+                <h2 class="section-header">📈 Market Analysis</h2>
+                <div class="analysis-content" id="market-analysis-content">
+                    <p>Detailed market analysis will be populated here based on comparable sales and current market conditions.</p>
+                    
+                    <div class="comparables-table">
+                        <h3>Recent Comparable Sales</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Address</th>
+                                        <th>Bed/Bath/Car</th>
+                                        <th>Sale Price</th>
+                                        <th>Sale Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="comparables-data">
+                                    <tr>
+                                        <td colspan="4">Comparable sales data will be populated here</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Buyer Feedback -->
+            <section class="report-section">
+                <h2 class="section-header">💬 Buyer Feedback Analysis</h2>
+                <div class="feedback-content" id="buyer-feedback-content">
+                    <p>Comprehensive buyer feedback analysis based on inspections and enquiries.</p>
+                    
+                    <div class="feedback-stats">
+                        <div class="stat-card positive">
+                            <h3 id="positive-feedback">65%</h3>
+                            <p>Positive Interest</p>
+                        </div>
+                        <div class="stat-card neutral">
+                            <h3 id="neutral-feedback">23%</h3>
+                            <p>Price Concerns</p>
+                        </div>
+                        <div class="stat-card info">
+                            <h3 id="total-inspections">35</h3>
+                            <p>Total Inspections</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Marketing Strategy -->
+            <section class="report-section">
+                <h2 class="section-header">🎯 Marketing Strategy</h2>
+                <div class="strategy-content" id="marketing-strategy-content">
+                    <div class="strategy-grid">
+                        <div class="strategy-item">
+                            <h4>🚀 Launch Strategy</h4>
+                            <p>Strategic pricing and timing recommendations for optimal market entry.</p>
+                        </div>
+                        <div class="strategy-item">
+                            <h4>📱 Digital Marketing</h4>
+                            <p>Comprehensive online presence across all major property portals.</p>
+                        </div>
+                        <div class="strategy-item">
+                            <h4>🏠 Open Inspections</h4>
+                            <p>Scheduled inspection times to maximize buyer engagement.</p>
+                        </div>
+                        <div class="strategy-item">
+                            <h4>📊 Progress Tracking</h4>
+                            <p>Weekly updates and market response analysis throughout campaign.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Next Steps -->
+            <section class="report-section">
+                <h2 class="section-header">✅ Next Steps</h2>
+                <div class="next-steps" id="next-steps-content">
+                    <div class="step-item">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <h4>Review & Approve Strategy</h4>
+                            <p>Discuss the recommended approach and make any adjustments</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <h4>Professional Photography</h4>
+                            <p>Schedule property styling and photography session</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <h4>Marketing Launch</h4>
+                            <p>Begin comprehensive marketing campaign across all channels</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">4</span>
+                        <div class="step-content">
+                            <h4>Regular Updates</h4>
+                            <p>Weekly progress reports and market feedback analysis</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="report-section contact-section">
+                <h2 class="section-header">📞 Your WHITEFOX Agent</h2>
+                <div class="contact-card">
+                    <div class="agent-photo">
+                        <div class="agent-placeholder">KW</div>
+                    </div>
+                    <div class="agent-details">
+                        <h3>Kristian Whitehead</h3>
+                        <p class="agent-title">Principal Agent, WHITEFOX Real Estate</p>
+                        <p class="agent-location">Gold Coast Premium Properties</p>
+                        <div class="contact-methods">
+                            <a href="mailto:kristian@whitefoxrealestate.com.au" class="contact-btn">
+                                📧 Email Me
+                            </a>
+                            <a href="tel:+61000000000" class="contact-btn">
+                                📱 Call Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Admin Access Button (Hidden, press Ctrl+K to show) -->
+    <div id="admin-access" style="position: fixed; bottom: 20px; right: 20px; display: none;">
+        <button id="show-admin" class="admin-btn">⚙️</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 WHITEFOX Real Estate. This report is confidential and prepared specifically for the vendor.</p>
+            <p>All information is believed to be accurate but should be verified independently.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
