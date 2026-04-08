@@ -100,7 +100,7 @@ body {
 .property-info h1 {
     font-family: 'Loew', sans-serif;
     font-size: 4rem;
-    font-weight: 950; /* Loew Black */
+    font-weight: 500; /* Loew Medium */
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
     text-transform: uppercase;
@@ -127,7 +127,7 @@ body {
 .section-header h2 {
     font-family: 'Loew', sans-serif;
     font-size: 3rem;
-    font-weight: 900; /* Loew Heavy */
+    font-weight: 500; /* Loew Medium */
     letter-spacing: -0.02em;
     margin-bottom: 0.5rem;
 }
@@ -595,6 +595,390 @@ body {
     font-size: 1rem;
     cursor: pointer;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Executive Summary Enhancements */
+.summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.key-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    padding: 3rem;
+    background: var(--grey-lightest);
+}
+
+.metric {
+    text-align: center;
+}
+
+.metric-value {
+    display: block;
+    font-family: 'Loew', sans-serif;
+    font-size: 3rem;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: var(--grey-light);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Campaign Performance */
+.campaign-section {
+    padding: 6rem 0;
+    background: var(--white);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.stat-card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--grey-lightest);
+    text-align: center;
+}
+
+.stat-card h4 {
+    font-family: 'Loew', sans-serif;
+    font-weight: 500;
+    color: var(--grey-medium);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+.stat-number {
+    font-family: 'Loew', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+}
+
+.stat-change {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.stat-change.positive {
+    color: var(--success);
+}
+
+.stat-change.neutral {
+    color: var(--grey-light);
+}
+
+.stat-change.negative {
+    color: var(--error);
+}
+
+.campaign-analysis {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--grey-medium);
+}
+
+/* Buyer Positioning */
+.buyers-section {
+    padding: 6rem 0;
+    background: var(--grey-lightest);
+}
+
+.buyer-categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.buyer-category {
+    background: var(--white);
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.buyer-category h3 {
+    font-family: 'Loew', sans-serif;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    color: var(--black);
+}
+
+.buyer-count {
+    font-family: 'Loew', sans-serif;
+    font-size: 4rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: var(--black);
+}
+
+.strong-interest {
+    border-left: 4px solid var(--success);
+}
+
+.moderate-interest {
+    border-left: 4px solid var(--warning);
+}
+
+.low-interest {
+    border-left: 4px solid var(--grey-light);
+}
+
+.buyer-profiles {
+    text-align: left;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--grey-medium);
+}
+
+.positioning-analysis {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--grey-medium);
+}
+
+/* Market Analysis */
+.market-section {
+    padding: 6rem 0;
+    background: var(--white);
+}
+
+.comparables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.comparable-property {
+    background: var(--white);
+    border: 1px solid var(--grey-lightest);
+    overflow: hidden;
+}
+
+.property-image {
+    height: 200px;
+    background: var(--grey-lightest);
+    overflow: hidden;
+}
+
+.property-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.property-details {
+    padding: 2rem;
+}
+
+.property-details h4 {
+    font-family: 'Loew', sans-serif;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--black);
+}
+
+.property-specs {
+    color: var(--grey-light);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.property-price {
+    font-family: 'Loew', sans-serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: var(--black);
+    margin-bottom: 1rem;
+}
+
+.property-history {
+    font-size: 0.8rem;
+    color: var(--grey-light);
+    margin-bottom: 1rem;
+}
+
+.property-link {
+    color: var(--black);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--black);
+}
+
+/* Next Steps */
+.nextsteps-section {
+    padding: 6rem 0;
+    background: var(--grey-lightest);
+}
+
+.steps-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem;
+    background: var(--white);
+}
+
+.step-number {
+    background: var(--black);
+    color: var(--white);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Loew', sans-serif;
+    font-weight: 500;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.step-text h4 {
+    font-family: 'Loew', sans-serif;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--black);
+}
+
+.step-text p {
+    color: var(--grey-medium);
+    line-height: 1.6;
+}
+
+/* Agent Message */
+.agent-section {
+    padding: 6rem 0;
+    background: var(--black);
+    color: var(--white);
+}
+
+.agent-message {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.agent-video-container {
+    position: relative;
+}
+
+.agent-video-container video {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.agent-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+}
+
+.agent-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.agent-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.agent-details h3 {
+    font-family: 'Loew', sans-serif;
+    font-weight: 500;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.agent-title {
+    color: var(--grey-lighter);
+    margin-bottom: 0.5rem;
+}
+
+.agent-location {
+    color: var(--grey-lighter);
+    margin-bottom: 2rem;
+}
+
+/* Admin Panel Enhancements */
+.admin-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.admin-section {
+    border-bottom: 1px solid var(--grey-lightest);
+    padding-bottom: 2rem;
+}
+
+.admin-section:last-child {
+    border-bottom: none;
+}
+
+.admin-section h3 {
+    font-family: 'Loew', sans-serif;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.admin-section input,
+.admin-section textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--grey-lightest);
+    background: var(--white);
+    font-family: inherit;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.admin-section textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.admin-section small {
+    color: var(--grey-light);
+    font-size: 0.8rem;
+    display: block;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
 }
 
 /* Responsive Design */

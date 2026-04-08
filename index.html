@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Admin Panel (Hidden by default) -->
+    <!-- Admin Panel -->
     <div id="admin-panel" class="admin-panel" style="display: none;">
         <div class="admin-container">
             <div class="admin-header">
@@ -19,28 +19,50 @@
                 <button id="close-admin" class="close-btn">×</button>
             </div>
             
-            <div class="form-group">
-                <label>Property Address</label>
-                <input type="text" id="property-address" placeholder="e.g., 6/152 Jefferson Lane, Palm Beach" />
-            </div>
-            
-            <div class="form-group">
-                <label>Report Code</label>
-                <input type="text" id="unique-code" placeholder="e.g., WF001" />
-            </div>
-            
-            <div class="form-group">
-                <label>Property Video</label>
-                <input type="file" id="property-video" accept="video/*" />
-                <small>Upload property video for header</small>
-            </div>
-            
-            <div class="form-group">
-                <label>Property Data</label>
-                <textarea id="property-overview" placeholder="Property Overview data..."></textarea>
-                <textarea id="market-analysis" placeholder="Market Analysis data..."></textarea>
-                <textarea id="buyer-feedback" placeholder="Buyer Feedback data..."></textarea>
-                <textarea id="marketing-strategy" placeholder="Marketing Strategy data..."></textarea>
+            <div class="admin-sections">
+                <!-- Property Details -->
+                <div class="admin-section">
+                    <h3>Property Information</h3>
+                    <input type="text" id="property-address" placeholder="Property Address" />
+                    <input type="text" id="unique-code" placeholder="Report Code (e.g., WF001)" />
+                    <input type="file" id="property-video" accept="video/*" />
+                    <small>Property video for header</small>
+                </div>
+
+                <!-- Agent Details -->
+                <div class="admin-section">
+                    <h3>Agent Information</h3>
+                    <input type="file" id="agent-photo" accept="image/*" />
+                    <small>Agent profile photo</small>
+                    <input type="file" id="agent-video" accept="video/*" />
+                    <small>Personal video message to vendor</small>
+                </div>
+
+                <!-- Report Data -->
+                <div class="admin-section">
+                    <h3>Campaign Performance</h3>
+                    <textarea id="campaign-data" placeholder="REA/Domain statistics, views, enquiries, inspections..."></textarea>
+                </div>
+
+                <div class="admin-section">
+                    <h3>Buyer Positioning</h3>
+                    <textarea id="buyer-positioning" placeholder="Detailed buyer profiles using Josh Phegan style..."></textarea>
+                </div>
+
+                <div class="admin-section">
+                    <h3>Market Analysis</h3>
+                    <textarea id="market-analysis" placeholder="Recent comparable sales with links and property history..."></textarea>
+                </div>
+
+                <div class="admin-section">
+                    <h3>Next Steps</h3>
+                    <textarea id="next-steps" placeholder="Strategic recommendations and action items..."></textarea>
+                </div>
+
+                <div class="admin-section">
+                    <h3>Summary</h3>
+                    <textarea id="executive-summary" placeholder="Campaign tracking, concerns, open home times, offers..."></textarea>
+                </div>
             </div>
             
             <button id="generate-report" class="admin-btn">Generate Report</button>
@@ -73,165 +95,196 @@
     <section class="summary-section">
         <div class="container">
             <div class="section-header">
-                <h2>THE DEAL:</h2>
-                <p class="section-subtitle">Your property's market position.</p>
+                <h2>Executive Summary</h2>
+                <p class="section-subtitle">Campaign overview and current position.</p>
             </div>
             
-            <div class="deal-card">
-                <div class="deal-content">
-                    <h3 id="property-address-display">Your Property Address</h3>
-                    <div class="deal-stats">
-                        <div class="stat">
-                            <span class="stat-label">RECOMMENDED VALUE</span>
-                            <span class="stat-value" id="recommended-value">Contact for Assessment</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-label">MARKET POSITION</span>
-                            <span class="stat-value">Premium Tier</span>
-                        </div>
+            <div class="summary-content">
+                <div id="executive-summary-content">
+                    <p>Your comprehensive weekly update covering campaign performance, market response, and strategic recommendations.</p>
+                </div>
+                
+                <div class="key-metrics">
+                    <div class="metric">
+                        <span class="metric-value" id="days-on-market">14</span>
+                        <span class="metric-label">Days on Market</span>
                     </div>
-                    <p class="deal-description" id="executive-summary">
-                        Your property represents exceptional opportunity in the luxury market. 
-                        Based on comprehensive analysis, we've identified the optimal strategy 
-                        to achieve the best possible outcome.
-                    </p>
+                    <div class="metric">
+                        <span class="metric-value" id="total-enquiries">28</span>
+                        <span class="metric-label">Total Enquiries</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value" id="inspection-groups">12</span>
+                        <span class="metric-label">Inspection Groups</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value" id="offers-received">2</span>
+                        <span class="metric-label">Offers Received</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Property Details -->
-    <section class="details-section">
+    <!-- Campaign Performance -->
+    <section class="campaign-section">
         <div class="container">
-            <div class="details-grid">
-                <div class="detail-item">
-                    <span class="detail-label">PROPERTY TYPE</span>
-                    <span class="detail-value" id="prop-type">-</span>
+            <div class="section-header">
+                <h2>Campaign Performance</h2>
+                <p class="section-subtitle">Detailed analytics from all marketing channels.</p>
+            </div>
+            
+            <div class="campaign-stats">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>Online Views</h4>
+                        <div class="stat-number" id="online-views">2,847</div>
+                        <div class="stat-change positive" id="views-change">+12% this week</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Enquiries</h4>
+                        <div class="stat-number" id="enquiries-count">28</div>
+                        <div class="stat-change positive" id="enquiries-change">+5 this week</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Inspections</h4>
+                        <div class="stat-number" id="inspections-count">42</div>
+                        <div class="stat-change neutral" id="inspections-change">Steady</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Shortlisted</h4>
+                        <div class="stat-number" id="shortlisted-count">156</div>
+                        <div class="stat-change positive" id="shortlisted-change">+23 this week</div>
+                    </div>
                 </div>
-                <div class="detail-item">
-                    <span class="detail-label">BEDROOMS</span>
-                    <span class="detail-value" id="prop-bedrooms">-</span>
+                
+                <div class="campaign-analysis" id="campaign-performance-content">
+                    <p>Comprehensive breakdown of campaign metrics and performance trends.</p>
                 </div>
-                <div class="detail-item">
-                    <span class="detail-label">BATHROOMS</span>
-                    <span class="detail-value" id="prop-bathrooms">-</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buyer Positioning -->
+    <section class="buyers-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Buyer Positioning</h2>
+                <p class="section-subtitle">Detailed buyer profiles and feedback analysis.</p>
+            </div>
+            
+            <div class="buyer-categories">
+                <div class="buyer-category strong-interest">
+                    <h3>Strong Interest</h3>
+                    <div class="buyer-count" id="strong-buyers">6</div>
+                    <div class="buyer-profiles" id="strong-buyer-profiles">
+                        <p>Detailed profiles of highly engaged prospects will appear here.</p>
+                    </div>
                 </div>
-                <div class="detail-item">
-                    <span class="detail-label">PARKING</span>
-                    <span class="detail-value" id="prop-parking">-</span>
+                
+                <div class="buyer-category moderate-interest">
+                    <h3>Moderate Interest</h3>
+                    <div class="buyer-count" id="moderate-buyers">8</div>
+                    <div class="buyer-profiles" id="moderate-buyer-profiles">
+                        <p>Profiles of buyers requiring additional engagement.</p>
+                    </div>
                 </div>
-                <div class="detail-item">
-                    <span class="detail-label">LAND SIZE</span>
-                    <span class="detail-value" id="prop-landsize">-</span>
+                
+                <div class="buyer-category low-interest">
+                    <h3>Ruled Out / Cold</h3>
+                    <div class="buyer-count" id="cold-buyers">14</div>
+                    <div class="buyer-profiles" id="cold-buyer-profiles">
+                        <p>Feedback from buyers who have decided against proceeding.</p>
+                    </div>
                 </div>
-                <div class="detail-item">
-                    <span class="detail-label">INSPECTIONS</span>
-                    <span class="detail-value" id="total-inspections">35</span>
-                </div>
+            </div>
+            
+            <div class="positioning-analysis" id="buyer-positioning-content">
+                <p>Comprehensive buyer positioning analysis using Josh Phegan methodology.</p>
             </div>
         </div>
     </section>
 
     <!-- Market Analysis -->
-    <section class="analysis-section">
+    <section class="market-section">
         <div class="container">
             <div class="section-header">
                 <h2>Market Analysis</h2>
-                <p class="section-subtitle">Data-driven insights from comparable sales.</p>
+                <p class="section-subtitle">Recent comparable sales and market trends.</p>
             </div>
             
-            <div class="analysis-content" id="market-analysis-content">
-                <p>Comprehensive market analysis based on recent comparable sales and current market conditions.</p>
+            <div class="market-analysis" id="market-analysis-content">
+                <p>Detailed market analysis with recent comparable properties.</p>
             </div>
             
-            <div class="comparables">
-                <h3>Recent Comparable Sales</h3>
-                <div class="comparables-list" id="comparables-data">
-                    <div class="comparable-item">
-                        <div class="comp-address">Loading comparable data...</div>
-                        <div class="comp-details">-/-/-</div>
-                        <div class="comp-price">-</div>
-                        <div class="comp-date">-</div>
+            <div class="comparables-grid" id="comparables-grid">
+                <div class="comparable-property">
+                    <div class="property-image">
+                        <img src="#" alt="Comparable Property" />
+                    </div>
+                    <div class="property-details">
+                        <h4>Property Address</h4>
+                        <p class="property-specs">2 bed • 2 bath • 1 car</p>
+                        <p class="property-price">$1,850,000</p>
+                        <p class="property-history">14 days on market • Price reduced once</p>
+                        <a href="#" class="property-link">View Online</a>
                     </div>
                 </div>
+                <!-- More comparables will be populated here -->
             </div>
         </div>
     </section>
 
-    <!-- Buyer Feedback -->
-    <section class="feedback-section">
+    <!-- Next Steps -->
+    <section class="nextsteps-section">
         <div class="container">
             <div class="section-header">
-                <h2>Buyer Sentiment</h2>
-                <p class="section-subtitle">Real feedback from prospective buyers.</p>
+                <h2>Next Steps</h2>
+                <p class="section-subtitle">Strategic recommendations based on current market response.</p>
             </div>
             
-            <div class="feedback-stats">
-                <div class="feedback-stat positive">
-                    <div class="stat-number" id="positive-feedback">65%</div>
-                    <div class="stat-desc">Positive Response</div>
+            <div class="steps-content" id="next-steps-content">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">
+                        <h4>Review Current Positioning</h4>
+                        <p>Assess market response and consider strategic adjustments.</p>
+                    </div>
                 </div>
-                <div class="feedback-stat neutral">
-                    <div class="stat-number" id="neutral-feedback">23%</div>
-                    <div class="stat-desc">Price Sensitivity</div>
-                </div>
-                <div class="feedback-stat info">
-                    <div class="stat-number" id="enquiries">28</div>
-                    <div class="stat-desc">Enquiries</div>
-                </div>
-            </div>
-            
-            <div class="feedback-content" id="buyer-feedback-content">
-                <p>Detailed analysis of buyer feedback and market response.</p>
+                <!-- More steps will be populated here -->
             </div>
         </div>
     </section>
 
-    <!-- Marketing Strategy -->
-    <section class="strategy-section">
+    <!-- Agent Message -->
+    <section class="agent-section">
         <div class="container">
             <div class="section-header">
-                <h2>Marketing Strategy</h2>
-                <p class="section-subtitle">Digital first. Always at the forefront.</p>
+                <h2>Personal Message</h2>
+                <p class="section-subtitle">A message from your WHITEFOX agent.</p>
             </div>
             
-            <div class="strategy-grid">
-                <div class="strategy-card">
-                    <h4>Launch Strategy</h4>
-                    <p>Strategic pricing and timing for optimal market entry.</p>
+            <div class="agent-message">
+                <div class="agent-video-container">
+                    <video id="agent-video-display" controls poster="">
+                        <source src="" type="video/mp4">
+                        <p>Your browser doesn't support video playback.</p>
+                    </video>
                 </div>
-                <div class="strategy-card">
-                    <h4>Digital Marketing</h4>
-                    <p>Comprehensive online presence across all major platforms.</p>
-                </div>
-                <div class="strategy-card">
-                    <h4>Network Leverage</h4>
-                    <p>Access to WHITEFOX's extensive buyer network.</p>
-                </div>
-                <div class="strategy-card">
-                    <h4>Progress Tracking</h4>
-                    <p>Weekly updates and real-time market feedback.</p>
-                </div>
-            </div>
-            
-            <div class="strategy-content" id="marketing-strategy-content">
-                <p>Tailored marketing approach based on your property's unique positioning.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Agent Contact -->
-    <section class="contact-section">
-        <div class="container">
-            <div class="contact-card">
-                <div class="agent-info">
-                    <h3>Kristian Whitehead</h3>
-                    <p class="agent-title">Principal Agent</p>
-                    <p class="agent-location">WHITEFOX Real Estate - Gold Coast</p>
-                </div>
-                <div class="contact-actions">
-                    <a href="mailto:kristian@whitefoxrealestate.com.au" class="contact-btn primary">Email</a>
-                    <a href="tel:+61000000000" class="contact-btn secondary">Call</a>
+                
+                <div class="agent-contact">
+                    <div class="agent-photo">
+                        <img id="agent-photo-display" src="#" alt="Agent Photo">
+                    </div>
+                    <div class="agent-details">
+                        <h3>Kristian Whitehead</h3>
+                        <p class="agent-title">Principal Agent</p>
+                        <p class="agent-location">WHITEFOX Real Estate - Gold Coast</p>
+                        <div class="contact-actions">
+                            <a href="mailto:kristian@whitefoxrealestate.com.au" class="contact-btn primary">Email</a>
+                            <a href="tel:+61000000000" class="contact-btn secondary">Call</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -253,7 +306,7 @@
         </div>
     </footer>
 
-    <!-- Admin Access (Hidden) -->
+    <!-- Admin Access -->
     <div id="admin-access" style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 999;">
         <button id="show-admin" class="floating-admin">⚙</button>
     </div>
