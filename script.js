@@ -408,68 +408,66 @@ class VendorReportPlatform {
             campaignData: `
                 COMPLETE PLATFORM PERFORMANCE (Domain + REA + WHITEFOX):
                 
-                ▪ Domain Views: 267 (reporting period Mar 23 - Apr 7, 2026)
-                ▪ REA Views: 1,042 (REA platform reporting)
-                ▪ Total Engagement: 2,717 combined interactions
+                ▪ Total Online Views: 1,309 (Domain 267 + REA 1,042)
                 ▪ Photo Views: 2,617 (Domain)
                 ▪ Floorplan Views: 51 | eBrochure Views: 49
                 ▪ Total Leads Generated: 10 (WHITEFOX CRM tracking)
                 ▪ Domain Enquiries: 2 (1 email, 1 phone call from mobile)
                 ▪ Open Homes Held: 2 sessions
-                ▪ Total Inspection Attendance: 5 viewers
+                ▪ Total Inspections: 5 individual attendees
                 ▪ Social Media Reach: 6,990 ad impressions, 2,244 people reached
                 ▪ Shortlisted/Saved: 5 active watchers, 1 address copied
                 ▪ Campaign Duration: 78 days on market, 16 days live online
-                ▪ Listing Performance: 77 views from social media campaigns
+                ▪ Conversion Rate: 0.76% (10 leads from 1,309 total views)
                 
-                Strong dual-platform performance with 1,309 total views (Domain 267 + REA 1,042) converting to 10 qualified leads. Excellent social media amplification with 6,990 impressions reaching 2,244 people. Photo engagement exceptional at 2,617 views indicating high buyer interest in property presentation.
+                Strong dual-platform performance with 1,309 total online views converting to 10 qualified leads. Excellent social media amplification with 6,990 impressions reaching 2,244 people. Photo engagement exceptional at 2,617 views indicating high buyer interest in property presentation.
             `,
             buyerPositioning: `
                 STRONG INTEREST (3 buyers):
                 
-                Glen W. - Finance-Dependent Buyer
-                "Has interest, would be subject to finance, requested open home time to view the property this weekend."
-                Property documents sent, weekend inspection requested - Apr 8
+                • Glen W. - Finance-Dependent Buyer
+                  ▪ Interest Level: Subject to finance approval
+                  ▪ Action Required: Weekend inspection requested
+                  ▪ Status: Property documents sent - Apr 8
                 
-                Veronique F. - REA Lead - Broker Consultation
-                "Has interest, is speaking with broker this afternoon to discuss. Indication via propps puts it at $1m - $1.1m."
-                Attended inspection Apr 4, broker consultation in progress
+                • Veronique F. - REA Lead 
+                  ▪ Interest Level: Broker consultation in progress ($1M-$1.1M range)
+                  ▪ Action Required: Await broker outcome
+                  ▪ Status: Attended inspection Apr 4
                 
-                Khrishna O. - REA Lead - $1M Offer Potential
-                "Would pay $1m, asked for something on contract but sensed hesitation. Said she would get back to me."
-                Has capacity $1.2m range, place on market in Benowa - Apr 7
+                • Khrishna O. - REA Lead
+                  ▪ Interest Level: $1M offer potential (capacity $1.2M)
+                  ▪ Action Required: Contract discussion follow-up
+                  ▪ Status: Has property on market in Benowa - Apr 7
                 
                 MODERATE INTEREST (4 buyers):
                 
-                Graeme F. - Inspection Attendee
-                "Attended inspection on April 4th. Follow-up call required to gauge genuine interest level."
-                Called no answer, SMS sent Apr 7
+                • Graeme F. - Inspection Attendee
+                  ▪ Action Required: Follow-up call needed
+                  ▪ Status: No answer, SMS sent Apr 7
                 
-                Zac P. - Domain Lead - Information Seeking
-                "Seeking guidance on levies, rates, oncosts etc also price guide and rental estimate per week."
-                Left voicemail, SMS sent with property documents - Apr 2
+                • Zac P. - Domain Lead
+                  ▪ Interest Level: Information seeking (levies, rates, rental estimate)
+                  ▪ Status: Left voicemail, documents sent Apr 2
                 
-                Raquel R. - Inspection Attendee
-                "Attended inspection March 28th. Follow-up contact made for further discussion."
-                Left voicemail, SMS sent with documents - Apr 2
+                • Raquel R. - Inspection Attendee  
+                  ▪ Action Required: Follow-up discussion
+                  ▪ Status: Attended Mar 28, documents sent Apr 2
                 
-                Gary . - Inspection Attendee
-                "Attended inspection March 28th. Contact established, requires follow-up."
-                Contacted Apr 2, welcome SMS sent
+                • Gary . - Inspection Attendee
+                  ▪ Action Required: Follow-up contact
+                  ▪ Status: Attended Mar 28, contacted Apr 2
                 
                 RULED OUT/COLD (3 buyers):
                 
-                Michelle H. - Inspection Attendee
-                "Attended inspection April 4th. Check-in contact made, response pending."
-                Not available Apr 7, SMS check-in sent
+                • Michelle H. - Inspection Attendee
+                  ▪ Status: Not available Apr 7, check-in SMS sent
                 
-                Renee V. - REA Lead - Non-Responsive
-                "Requested property inspection and price indication. Multiple follow-up attempts made."
-                No answer Apr 2, closing loop on lead
+                • Renee V. - REA Lead  
+                  ▪ Status: Non-responsive, closing loop Apr 2
                 
-                Rachel S. - REA Lead - Budget Qualification
-                "Requesting price guide and outgoings to determine if within budget. Has finance pre-approval."
-                Same buyer as Raquel - duplicate lead identified
+                • Rachel S. - REA Lead
+                  ▪ Status: Budget qualification, duplicate of Raquel
             `,
             marketAnalysis: `
                 Recent Chevron Island comparable sales demonstrate strong market fundamentals in the Darrambal Street precinct.
