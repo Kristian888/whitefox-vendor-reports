@@ -1,0 +1,16 @@
+{
+  "name": "whitefox-vendor-reports",
+  "version": "1.0.0",
+  "description": "Professional vendor report platform for WHITEFOX Real Estate",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "python3 -m http.server 8080"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "keywords": ["real-estate", "vendor-reports", "whitefox"],
+  "author": "WHITEFOX Real Estate",
+  "license": "MIT"
+}
