@@ -1,26 +1,24 @@
-// WHITEFOX Vendor Reports - JavaScript Functionality
+// WHITEFOX Vendor Reports - Brand-Aligned JavaScript
 
-class VendorReportManager {
+class WhitefoxVendorReports {
     constructor() {
         this.initializeEventListeners();
         this.loadSampleData();
     }
 
     initializeEventListeners() {
-        // Admin panel controls
+        // Admin panel keyboard shortcut
         document.addEventListener('keydown', (e) => {
-            // Ctrl+K to show admin panel
             if (e.ctrlKey && e.key === 'k') {
                 e.preventDefault();
                 this.showAdminPanel();
             }
-            // Escape to close admin panel
             if (e.key === 'Escape') {
                 this.hideAdminPanel();
             }
         });
 
-        // Admin panel buttons
+        // Admin panel controls
         const showAdminBtn = document.getElementById('show-admin');
         const closeAdminBtn = document.getElementById('close-admin');
         const generateBtn = document.getElementById('generate-report');
@@ -29,18 +27,27 @@ class VendorReportManager {
         if (closeAdminBtn) closeAdminBtn.addEventListener('click', () => this.hideAdminPanel());
         if (generateBtn) generateBtn.addEventListener('click', () => this.generateReport());
 
-        // File upload handler
+        // Video upload handler
         const videoUpload = document.getElementById('property-video');
         if (videoUpload) {
             videoUpload.addEventListener('change', (e) => this.handleVideoUpload(e));
         }
+
+        // Show admin access on hover for development
+        document.addEventListener('mousemove', (e) => {
+            const adminAccess = document.getElementById('admin-access');
+            if (adminAccess && (e.clientX > window.innerWidth - 100) && (e.clientY > window.innerHeight - 100)) {
+                adminAccess.style.display = 'block';
+            } else if (adminAccess) {
+                adminAccess.style.display = 'none';
+            }
+        });
     }
 
     showAdminPanel() {
         const panel = document.getElementById('admin-panel');
         if (panel) {
             panel.style.display = 'flex';
-            // Focus on first input
             const firstInput = panel.querySelector('input');
             if (firstInput) firstInput.focus();
         }
@@ -60,13 +67,12 @@ class VendorReportManager {
             const videoElement = document.getElementById('property-video-display');
             if (videoElement) {
                 videoElement.src = videoURL;
-                videoElement.load(); // Reload the video element
+                videoElement.load();
             }
         }
     }
 
     generateReport() {
-        // Get form data
         const address = document.getElementById('property-address').value;
         const code = document.getElementById('unique-code').value;
         const overview = document.getElementById('property-overview').value;
@@ -79,7 +85,6 @@ class VendorReportManager {
             return;
         }
 
-        // Update the page with the new data
         this.updateReportContent({
             address,
             code,
@@ -93,7 +98,6 @@ class VendorReportManager {
         const baseURL = window.location.origin + window.location.pathname;
         const reportURL = `${baseURL}?report=${code}`;
         
-        // Show generated link
         const linkContainer = document.getElementById('generated-link');
         if (linkContainer) {
             linkContainer.innerHTML = `
@@ -103,7 +107,6 @@ class VendorReportManager {
             `;
         }
 
-        // Save data to localStorage for persistence
         this.saveReportData(code, {
             address,
             overview,
@@ -113,24 +116,22 @@ class VendorReportManager {
             timestamp: new Date().toISOString()
         });
 
-        // Hide admin panel
         this.hideAdminPanel();
     }
 
     updateReportContent(data) {
-        // Update property title
-        const titleElement = document.getElementById('property-title-text');
+        // Update property title and address
+        const titleElement = document.getElementById('property-title');
+        const addressElement = document.getElementById('property-address-display');
+        
         if (titleElement) {
-            titleElement.textContent = data.address || 'Your Premium Property Report';
+            titleElement.textContent = data.address || 'Your Property Report';
         }
-
-        // Update address in property overview
-        const addressElement = document.getElementById('prop-address');
         if (addressElement) {
             addressElement.textContent = data.address || 'Your Property Address';
         }
 
-        // Parse and update overview data if provided
+        // Parse overview data for property details
         if (data.overview) {
             this.parseOverviewData(data.overview);
         }
@@ -139,7 +140,7 @@ class VendorReportManager {
         if (data.analysis) {
             const analysisElement = document.getElementById('market-analysis-content');
             if (analysisElement) {
-                analysisElement.innerHTML = `<p>${data.analysis}</p>` + analysisElement.innerHTML;
+                analysisElement.innerHTML = `<p>${data.analysis}</p>`;
             }
         }
 
@@ -147,7 +148,7 @@ class VendorReportManager {
         if (data.feedback) {
             const feedbackElement = document.getElementById('buyer-feedback-content');
             if (feedbackElement) {
-                feedbackElement.innerHTML = `<p>${data.feedback}</p>` + feedbackElement.innerHTML;
+                feedbackElement.innerHTML = `<p>${data.feedback}</p>`;
             }
         }
 
@@ -155,14 +156,12 @@ class VendorReportManager {
         if (data.strategy) {
             const strategyElement = document.getElementById('marketing-strategy-content');
             if (strategyElement) {
-                strategyElement.innerHTML = `<div style="margin-bottom: 2rem;"><p>${data.strategy}</p></div>` + strategyElement.innerHTML;
+                strategyElement.innerHTML = `<p>${data.strategy}</p>`;
             }
         }
     }
 
     parseOverviewData(overviewText) {
-        // Simple parsing of overview data
-        // Look for common patterns like "Bedrooms: 3", "Type: House", etc.
         const patterns = {
             bedrooms: /bedrooms?:?\s*(\d+)/i,
             bathrooms: /bathrooms?:?\s*(\d+)/i,
@@ -180,16 +179,31 @@ class VendorReportManager {
                 }
             }
         });
+
+        // Extract price if available
+        const priceMatch = overviewText.match(/(?:price|value|worth):?\s*\$?([\d,]+(?:\.\d+)?)\s*(?:million|m)?/i);
+        if (priceMatch) {
+            const valueElement = document.getElementById('recommended-value');
+            if (valueElement) {
+                let price = priceMatch[1];
+                if (overviewText.toLowerCase().includes('million') || overviewText.toLowerCase().includes('m')) {
+                    price = `$${price} Million`;
+                } else {
+                    price = `$${price}`;
+                }
+                valueElement.textContent = price;
+            }
+        }
     }
 
     saveReportData(code, data) {
-        const reports = JSON.parse(localStorage.getItem('vendorReports') || '{}');
+        const reports = JSON.parse(localStorage.getItem('whitefoxReports') || '{}');
         reports[code] = data;
-        localStorage.setItem('vendorReports', JSON.stringify(reports));
+        localStorage.setItem('whitefoxReports', JSON.stringify(reports));
     }
 
     loadReportData(code) {
-        const reports = JSON.parse(localStorage.getItem('vendorReports') || '{}');
+        const reports = JSON.parse(localStorage.getItem('whitefoxReports') || '{}');
         return reports[code] || null;
     }
 
@@ -206,7 +220,7 @@ class VendorReportManager {
             }
         }
 
-        // Load default sample data for Jefferson Lane example
+        // Load Jefferson Lane sample data
         this.loadJeffersonLaneSample();
     }
 
@@ -214,96 +228,85 @@ class VendorReportManager {
         const sampleData = {
             address: "6/152 Jefferson Lane, Palm Beach",
             overview: `
-                Type: Apartment/Unit
+                Type: Premium Apartment
                 Bedrooms: 2
                 Bathrooms: 2
                 Parking: 1
                 Land Size: N/A (Strata)
+                Price: $2,000,000
             `,
             analysis: `
-                Our analysis of recent sales in the Jefferson Lane precinct shows strong demand for quality 2-bedroom apartments. 
-                Based on comparable properties, we recommend a strategic pricing approach of $2,000,000 to maximize interest 
-                and achieve the best possible outcome.
+                Our comprehensive analysis of the Jefferson Lane precinct reveals exceptional demand for luxury 2-bedroom apartments. Recent comparable sales demonstrate strong market confidence, with properties achieving premium prices. Based on current market conditions and comparable properties, we recommend strategic positioning at $2,000,000 to maximize market interest while allowing negotiation flexibility.
             `,
             feedback: `
-                Based on inspections and enquiries, we have compiled comprehensive feedback from 35 prospective buyers. 
-                65% provided positive feedback on the location, presentation, and lifestyle offering. This strong market 
-                response positions us well for a successful campaign.
+                Following extensive market testing with 35 prospective buyers, we've identified strong positive sentiment. 65% of inspectors provided favorable feedback regarding location, presentation, and lifestyle offering. Price sensitivity was noted by 23% of prospects, indicating optimal negotiation opportunity. This response profile positions the property favorably for a successful campaign.
             `,
             strategy: `
-                Recommended launch price of $2,000,000 allows for negotiation flexibility while maximizing market interest. 
-                4-6 week campaign duration for optimal market exposure, targeting both owner-occupiers and premium investors 
-                through comprehensive digital marketing across all major property portals.
+                Digital-first marketing approach leveraging WHITEFOX's extensive network and premium positioning. Recommended 4-6 week campaign duration targeting both owner-occupiers and sophisticated investors. Comprehensive online presence across all major portals, supported by professional photography and virtual tour technology. Strategic pricing allows market flexibility while maximizing exposure.
             `
         };
 
         this.updateReportContent(sampleData);
         
-        // Update specific elements for the sample
-        document.getElementById('price-recommendation').textContent = 'Recommended Value: $2,000,000';
-        document.getElementById('positive-feedback').textContent = '65%';
-        document.getElementById('neutral-feedback').textContent = '23%';
-        document.getElementById('total-inspections').textContent = '35';
+        // Update sample comparables
+        this.loadSampleComparables();
+    }
 
-        // Update comparables table
+    loadSampleComparables() {
         const comparablesData = document.getElementById('comparables-data');
         if (comparablesData) {
             comparablesData.innerHTML = `
-                <tr>
-                    <td>5/148 Jefferson Lane</td>
-                    <td>2/2/1</td>
-                    <td>$1,850,000</td>
-                    <td>Nov 2025</td>
-                </tr>
-                <tr>
-                    <td>3/156 Jefferson Lane</td>
-                    <td>2/2/1</td>
-                    <td>$1,920,000</td>
-                    <td>Dec 2025</td>
-                </tr>
-                <tr>
-                    <td>7/150 Jefferson Lane</td>
-                    <td>2/1/1</td>
-                    <td>$1,750,000</td>
-                    <td>Oct 2025</td>
-                </tr>
+                <div class="comparable-item">
+                    <div class="comp-address">5/148 Jefferson Lane, Palm Beach</div>
+                    <div class="comp-details">2 / 2 / 1</div>
+                    <div class="comp-price">$1,850,000</div>
+                    <div class="comp-date">Nov 2025</div>
+                </div>
+                <div class="comparable-item">
+                    <div class="comp-address">3/156 Jefferson Lane, Palm Beach</div>
+                    <div class="comp-details">2 / 2 / 1</div>
+                    <div class="comp-price">$1,920,000</div>
+                    <div class="comp-date">Dec 2025</div>
+                </div>
+                <div class="comparable-item">
+                    <div class="comp-address">7/150 Jefferson Lane, Palm Beach</div>
+                    <div class="comp-details">2 / 1 / 1</div>
+                    <div class="comp-price">$1,750,000</div>
+                    <div class="comp-date">Oct 2025</div>
+                </div>
             `;
         }
     }
 
-    // Utility method for copying text to clipboard
-    copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            console.log('Copied to clipboard');
-        }).catch(err => {
-            console.error('Failed to copy: ', err);
+    // Smooth scroll for internal navigation
+    initializeSmoothScrolling() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
     }
 }
 
-// Initialize the application
+// Initialize application
 document.addEventListener('DOMContentLoaded', () => {
-    new VendorReportManager();
-    
-    // Add smooth scrolling for any internal links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+    new WhitefoxVendorReports();
 });
 
-// Add some interactive enhancements
+// Fade-in animation on scroll
 window.addEventListener('load', () => {
-    // Fade in animations for report sections
-    const sections = document.querySelectorAll('.report-section');
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -311,17 +314,18 @@ window.addEventListener('load', () => {
                 entry.target.style.transform = 'translateY(0)';
             }
         });
-    });
+    }, observerOptions);
 
-    sections.forEach(section => {
+    // Observe sections for animation
+    document.querySelectorAll('section:not(.hero)').forEach(section => {
         section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        section.style.transform = 'translateY(30px)';
+        section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
         observer.observe(section);
     });
 });
 
-// Export for potential external use
+// Export for external use
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = VendorReportManager;
+    module.exports = WhitefoxVendorReports;
 }
