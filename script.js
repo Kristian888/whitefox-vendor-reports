@@ -1,152 +1,135 @@
-// WHITEFOX Vendor Reports - Professional Reporting System
-
-class WhitefoxVendorReports {
+class VendorReportPlatform {
     constructor() {
-        this.initializeEventListeners();
+        this.currentReport = null;
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
         this.loadSampleData();
     }
 
-    initializeEventListeners() {
-        // Admin panel keyboard shortcut
+    setupEventListeners() {
+        // Admin panel access
         document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'k') {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                 e.preventDefault();
                 this.showAdminPanel();
             }
-            if (e.key === 'Escape') {
-                this.hideAdminPanel();
-            }
         });
 
-        // Admin panel controls
-        const showAdminBtn = document.getElementById('show-admin');
-        const closeAdminBtn = document.getElementById('close-admin');
-        const generateBtn = document.getElementById('generate-report');
-
-        if (showAdminBtn) showAdminBtn.addEventListener('click', () => this.showAdminPanel());
-        if (closeAdminBtn) closeAdminBtn.addEventListener('click', () => this.hideAdminPanel());
-        if (generateBtn) generateBtn.addEventListener('click', () => this.generateReport());
-
-        // File upload handlers
-        const videoUpload = document.getElementById('property-video');
-        const agentPhotoUpload = document.getElementById('agent-photo');
-        const agentVideoUpload = document.getElementById('agent-video');
-
-        if (videoUpload) videoUpload.addEventListener('change', (e) => this.handlePropertyVideoUpload(e));
-        if (agentPhotoUpload) agentPhotoUpload.addEventListener('change', (e) => this.handleAgentPhotoUpload(e));
-        if (agentVideoUpload) agentVideoUpload.addEventListener('change', (e) => this.handleAgentVideoUpload(e));
-
-        // Show admin access on specific interaction
-        document.addEventListener('mousemove', (e) => {
-            const adminAccess = document.getElementById('admin-access');
-            if (adminAccess && (e.clientX > window.innerWidth - 100) && (e.clientY > window.innerHeight - 100)) {
-                adminAccess.style.display = 'block';
-            } else if (adminAccess) {
-                adminAccess.style.display = 'none';
-            }
-        });
+        // Admin panel hover access
+        const footer = document.querySelector('footer');
+        if (footer) {
+            footer.addEventListener('mouseenter', () => {
+                setTimeout(() => {
+                    const adminBtn = document.createElement('div');
+                    adminBtn.innerHTML = '⚙️';
+                    adminBtn.style.cssText = 'position:fixed;bottom:10px;right:10px;cursor:pointer;font-size:20px;z-index:1000;';
+                    adminBtn.onclick = () => this.showAdminPanel();
+                    adminBtn.id = 'admin-btn';
+                    if (!document.getElementById('admin-btn')) {
+                        document.body.appendChild(adminBtn);
+                    }
+                }, 1000);
+            });
+        }
     }
 
     showAdminPanel() {
-        const panel = document.getElementById('admin-panel');
-        if (panel) {
-            panel.style.display = 'flex';
-            const firstInput = panel.querySelector('input');
-            if (firstInput) firstInput.focus();
-        }
-    }
-
-    hideAdminPanel() {
-        const panel = document.getElementById('admin-panel');
-        if (panel) {
-            panel.style.display = 'none';
-        }
-    }
-
-    handlePropertyVideoUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const videoURL = URL.createObjectURL(file);
-            const videoElement = document.getElementById('property-video-display');
-            if (videoElement) {
-                videoElement.src = videoURL;
-                videoElement.load();
-            }
-        }
-    }
-
-    handleAgentPhotoUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const photoURL = URL.createObjectURL(file);
-            const photoElement = document.getElementById('agent-photo-display');
-            if (photoElement) {
-                photoElement.src = photoURL;
-                photoElement.style.display = 'block';
-            }
-        }
-    }
-
-    handleAgentVideoUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const videoURL = URL.createObjectURL(file);
-            const videoElement = document.getElementById('agent-video-display');
-            if (videoElement) {
-                videoElement.src = videoURL;
-                videoElement.load();
-            }
-        }
-    }
-
-    generateReport() {
-        const data = this.collectFormData();
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 10000; display: flex;
+            align-items: center; justify-content: center;
+        `;
         
-        if (!data.address || !data.code) {
-            alert('Please fill in at least the property address and report code.');
-            return;
-        }
+        modal.innerHTML = `
+            <div style="background: white; padding: 2rem; border-radius: 10px; max-width: 600px; width: 90%;">
+                <h2>WHITEFOX Vendor Reports - Admin Panel</h2>
+                <form id="admin-form">
+                    <div style="margin-bottom: 1rem;">
+                        <label>Report Code:</label>
+                        <input type="text" id="report-code" placeholder="e.g., WF001" style="width: 100%; padding: 8px; margin-top: 4px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Property Address:</label>
+                        <input type="text" id="property-address" placeholder="Full property address" style="width: 100%; padding: 8px; margin-top: 4px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Campaign Performance Data:</label>
+                        <textarea id="campaign-data" rows="4" style="width: 100%; padding: 8px; margin-top: 4px;" placeholder="Campaign statistics and performance metrics..."></textarea>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Buyer Positioning:</label>
+                        <textarea id="buyer-positioning" rows="6" style="width: 100%; padding: 8px; margin-top: 4px;" placeholder="Buyer profiles and positioning details..."></textarea>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Market Analysis:</label>
+                        <textarea id="market-analysis" rows="3" style="width: 100%; padding: 8px; margin-top: 4px;" placeholder="Market analysis and comparable sales..."></textarea>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Next Steps:</label>
+                        <textarea id="next-steps" rows="3" style="width: 100%; padding: 8px; margin-top: 4px;" placeholder="Recommended next steps and actions..."></textarea>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Executive Summary:</label>
+                        <textarea id="executive-summary" rows="4" style="width: 100%; padding: 8px; margin-top: 4px;" placeholder="Executive summary for the vendor..."></textarea>
+                    </div>
+                    <div style="text-align: center; gap: 1rem; display: flex;">
+                        <button type="submit" style="background: #1a472a; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Save Report</button>
+                        <button type="button" onclick="this.parentElement.parentElement.parentElement.parentElement.remove()" style="background: #666; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        `;
 
-        this.updateReportContent(data);
-        this.generateReportLink(data.code);
-        this.saveReportData(data.code, data);
-        this.hideAdminPanel();
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.remove();
+        });
+
+        document.getElementById('admin-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.saveReport();
+            modal.remove();
+        });
+
+        document.body.appendChild(modal);
     }
 
-    collectFormData() {
-        return {
-            address: document.getElementById('property-address')?.value || '',
-            code: document.getElementById('unique-code')?.value || '',
-            campaignData: document.getElementById('campaign-data')?.value || '',
-            buyerPositioning: document.getElementById('buyer-positioning')?.value || '',
-            marketAnalysis: document.getElementById('market-analysis')?.value || '',
-            nextSteps: document.getElementById('next-steps')?.value || '',
-            executiveSummary: document.getElementById('executive-summary')?.value || ''
+    saveReport() {
+        const data = {
+            code: document.getElementById('report-code').value,
+            address: document.getElementById('property-address').value,
+            campaignData: document.getElementById('campaign-data').value,
+            buyerPositioning: document.getElementById('buyer-positioning').value,
+            marketAnalysis: document.getElementById('market-analysis').value,
+            nextSteps: document.getElementById('next-steps').value,
+            executiveSummary: document.getElementById('executive-summary').value
         };
+
+        this.storeReportData(data.code, data);
+        this.updateReportContent(data);
+        
+        // Update URL
+        const url = new URL(window.location);
+        url.searchParams.set('report', data.code);
+        window.history.pushState({}, '', url);
     }
 
     updateReportContent(data) {
-        // Update property title and address
-        const titleElement = document.getElementById('property-title');
-        if (titleElement) {
-            titleElement.textContent = data.address || 'Your Property Report';
-        }
-
-        // Update executive summary
-        if (data.executiveSummary) {
-            const summaryElement = document.getElementById('executive-summary-content');
-            if (summaryElement) {
-                summaryElement.innerHTML = `<p>${data.executiveSummary}</p>`;
-            }
+        // Update property info
+        const addressElement = document.querySelector('.property-address');
+        if (addressElement && data.address) {
+            addressElement.textContent = data.address;
         }
 
         // Update campaign performance
         if (data.campaignData) {
             const campaignElement = document.getElementById('campaign-performance-content');
             if (campaignElement) {
-                campaignElement.innerHTML = `<p>${data.campaignData}</p>`;
+                campaignElement.innerHTML = `<p>${data.campaignData.replace(/\n/g, '<br>')}</p>`;
             }
-            this.parseCampaignStats(data.campaignData);
         }
 
         // Update buyer positioning
@@ -162,33 +145,31 @@ class WhitefoxVendorReports {
         if (data.marketAnalysis) {
             const marketElement = document.getElementById('market-analysis-content');
             if (marketElement) {
-                marketElement.innerHTML = `<p>${data.marketAnalysis}</p>`;
+                marketElement.innerHTML = `<p>${data.marketAnalysis.replace(/\n/g, '<br>')}</p>`;
             }
         }
 
         // Update next steps
         if (data.nextSteps) {
-            this.parseNextSteps(data.nextSteps);
+            const stepsElement = document.getElementById('next-steps-content');
+            if (stepsElement) {
+                stepsElement.innerHTML = `<p>${data.nextSteps.replace(/\n/g, '<br>')}</p>`;
+            }
         }
-    }
 
-    parseCampaignStats(campaignData) {
-        // Set COMBINED metrics for WF053 from Domain + REA reports
-        const onlineViews = document.getElementById('online-views');
-        const enquiriesCount = document.getElementById('enquiries-count');
-        const inspectionsCount = document.getElementById('inspections-count');
-        const shortlistedCount = document.getElementById('shortlisted-count');
-        const daysOnMarket = document.getElementById('days-on-market');
-        const offersReceived = document.getElementById('offers-received');
-        const totalInspections = document.getElementById('total-inspections');
+        // Update executive summary
+        if (data.executiveSummary) {
+            const summaryElement = document.getElementById('executive-summary-content');
+            if (summaryElement) {
+                summaryElement.innerHTML = `<p>${data.executiveSummary.replace(/\n/g, '<br>')}</p>`;
+            }
+        }
 
-        if (onlineViews) onlineViews.textContent = '267';  // Domain views
-        if (enquiriesCount) enquiriesCount.textContent = '10';  // Total leads (WHITEFOX system)
-        if (inspectionsCount) inspectionsCount.textContent = '5';   // Total viewers across 2 opens
-        if (shortlistedCount) shortlistedCount.textContent = '5';   // Domain shortlisted
-        if (daysOnMarket) daysOnMarket.textContent = '16';  // Days live online
-        if (offersReceived) offersReceived.textContent = '0';  // No contracts/offers
-        if (totalInspections) totalInspections.textContent = '5';  // Inspection groups
+        // Update report code
+        const reportCodeElements = document.querySelectorAll('.report-code');
+        reportCodeElements.forEach(el => {
+            if (data.code) el.textContent = data.code;
+        });
     }
 
     parseBuyerProfiles(buyerData) {
@@ -206,7 +187,7 @@ class WhitefoxVendorReports {
         const profiles = this.extractBuyerProfiles(buyerData);
 
         // Update strong interest buyers
-        if (strongProfile && profiles.strong.length > 0) {
+        if (strongProfile) {
             strongProfile.innerHTML = profiles.strong.map(buyer => `
                 <div class="buyer-profile">
                     <div class="buyer-name">${buyer.name}</div>
@@ -215,12 +196,11 @@ class WhitefoxVendorReports {
                     <div class="buyer-status">${buyer.status}</div>
                 </div>
             `).join('');
-            
             document.getElementById('strong-buyers').textContent = profiles.strong.length;
         }
 
         // Update moderate interest buyers
-        if (moderateProfile && profiles.moderate.length > 0) {
+        if (moderateProfile) {
             moderateProfile.innerHTML = profiles.moderate.map(buyer => `
                 <div class="buyer-profile">
                     <div class="buyer-name">${buyer.name}</div>
@@ -229,12 +209,11 @@ class WhitefoxVendorReports {
                     <div class="buyer-status">${buyer.status}</div>
                 </div>
             `).join('');
-            
             document.getElementById('moderate-buyers').textContent = profiles.moderate.length;
         }
 
         // Update cold buyers
-        if (coldProfile && profiles.cold.length > 0) {
+        if (coldProfile) {
             coldProfile.innerHTML = profiles.cold.map(buyer => `
                 <div class="buyer-profile">
                     <div class="buyer-name">${buyer.name}</div>
@@ -243,7 +222,6 @@ class WhitefoxVendorReports {
                     <div class="buyer-status">${buyer.status}</div>
                 </div>
             `).join('');
-            
             document.getElementById('cold-buyers').textContent = profiles.cold.length;
         }
     }
@@ -255,91 +233,73 @@ class WhitefoxVendorReports {
             cold: []
         };
 
-        // Split by sections if structured data is provided
+        if (!buyerData) return profiles;
+
+        // Split by interest levels
         const sections = buyerData.split(/(?:STRONG|Strong|MODERATE|Moderate|COLD|Cold|RULED OUT|Ruled Out)/i);
         
-        // If structured data isn't provided, create sample profiles
-        if (sections.length < 4) {
-            return this.createSampleProfiles();
+        let currentSection = 'strong';
+        const lines = buyerData.split('\n');
+        
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            
+            // Detect section changes
+            if (line.match(/MODERATE\s+INTEREST/i)) {
+                currentSection = 'moderate';
+                continue;
+            } else if (line.match(/COLD|RULED\s+OUT/i)) {
+                currentSection = 'cold';
+                continue;
+            }
+            
+            // Extract buyer name pattern
+            const nameMatch = line.match(/^([A-Z][a-z]+\s+[A-Z]\.?)\s*-\s*(.+)/);
+            if (nameMatch) {
+                const name = nameMatch[1];
+                // Extract buyer type
+                const typeMatch = line.match(/-\s*(.+?)(?:\n|$)/);
+                const buyerType = typeMatch ? typeMatch[1] : 'Potential Buyer';
+                
+                // Look for details in following lines (quoted text)
+                let details = '';
+                let status = '';
+                for (let j = i + 1; j < Math.min(i + 5, lines.length); j++) {
+                    const nextLine = lines[j].trim();
+                    if (nextLine.startsWith('"') && nextLine.endsWith('"')) {
+                        details = nextLine;
+                    } else if (nextLine && !nextLine.match(/^[A-Z][a-z]+\s+[A-Z]\.?\s*-/) && !nextLine.match(/INTEREST/i)) {
+                        if (!status && nextLine.length < 100) {
+                            status = nextLine;
+                        }
+                    }
+                }
+
+                profiles[currentSection].push({
+                    name: name,
+                    type: this.formatBuyerType(buyerType),
+                    details: details || `"${buyerType.replace(/^-\s*/, '')}"`,
+                    status: status || 'Follow-up required'
+                });
+            }
         }
-
-        // Parse each section for buyer profiles
-        // This is a simplified parser - in practice, you'd provide structured data
-        const strongSection = sections[1] || '';
-        const moderateSection = sections[2] || '';
-        const coldSection = sections[3] || '';
-
-        profiles.strong = this.parseProfileSection(strongSection, 'strong');
-        profiles.moderate = this.parseProfileSection(moderateSection, 'moderate');
-        profiles.cold = this.parseProfileSection(coldSection, 'cold');
 
         return profiles;
     }
 
-    parseProfileSection(section, type) {
-        const lines = section.split('\n').filter(line => line.trim() && line.length > 10);
-        
-        return lines.slice(0, 6).map((line, index) => {
-            // Extract name pattern (First name + Initial)
-            const nameMatch = line.match(/([A-Z][a-z]+)\s+([A-Z])\.?/);
-            const name = nameMatch ? `${nameMatch[1]} ${nameMatch[2]}.` : this.generateSampleName();
-            
-            // Extract buyer type
-            const typeMatch = line.match(/(couple|family|investor|professional|downsizer|retiree)/i);
-            const buyerType = typeMatch ? typeMatch[1] : 'Potential Buyer';
-            
-            // Extract the main details (everything in quotes or main description)
-            const detailsMatch = line.match(/"([^"]+)"/) || line.match(/-\s*(.+)/);
-            const details = detailsMatch ? detailsMatch[1] : line.trim();
-            
-            // Generate appropriate status based on type
-            const status = this.generateStatus(type);
-            
-            return {
-                name: name,
-                type: this.formatBuyerType(buyerType),
-                details: details,
-                status: status
-            };
-        });
-    }
-
-    generateSampleName() {
-        const firstNames = ['James', 'Sarah', 'Michael', 'Emma', 'David', 'Lisa', 'Andrew', 'Karen', 'Robert', 'Amanda'];
-        const initials = ['K', 'M', 'T', 'R', 'S', 'W', 'B', 'H', 'L', 'G'];
-        
-        const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-        const initial = initials[Math.floor(Math.random() * initials.length)];
-        
-        return `${firstName} ${initial}.`;
-    }
-
     formatBuyerType(type) {
         const typeMap = {
-            'couple': 'Professional Couple',
-            'family': 'Local Family',
-            'investor': 'Property Investor',
-            'professional': 'Young Professional',
-            'downsizer': 'Downsizing Couple',
-            'retiree': 'Retiree Couple'
+            'finance-dependent buyer': 'Finance-Dependent Buyer',
+            'inspection attendee': 'Inspection Attendee',
+            'domain lead': 'Domain Lead',
+            'rea lead': 'REA Lead',
+            'minimal engagement': 'Minimal Engagement'
         };
-        
         return typeMap[type.toLowerCase()] || 'Potential Buyer';
     }
 
-    generateStatus(type) {
-        const statusOptions = {
-            'strong': ['Last contacted: 2 days ago', 'Scheduled follow-up call', 'Awaiting finance confirmation', 'Second inspection booked'],
-            'moderate': ['Requires follow-up call', 'Pending property sale', 'Considering options', 'Need additional information'],
-            'cold': ['No further contact required', 'Moved on to other properties', 'Outside price range', 'Different requirements']
-        };
-        
-        const options = statusOptions[type] || statusOptions['moderate'];
-        return options[Math.floor(Math.random() * options.length)];
-    }
-
     createSampleProfiles() {
-        // ALL 10 BUYERS from WF053 - 8/53 Darrambal Street PDF report
+        // ALL 10 BUYERS from WF053 - 8/53 Darrambal Street PDF report - ACTUAL DATA FROM PDFs
         return {
             strong: [
                 {
@@ -410,41 +370,7 @@ class WhitefoxVendorReports {
         };
     }
 
-    parseNextSteps(nextStepsData) {
-        const stepsContainer = document.getElementById('next-steps-content');
-        if (!stepsContainer) return;
-
-        // Parse steps from the text
-        const steps = nextStepsData.split('\n').filter(line => line.trim()).slice(0, 5);
-        
-        const stepsHTML = steps.map((step, index) => `
-            <div class="step-item">
-                <div class="step-number">${index + 1}</div>
-                <div class="step-text">
-                    <h4>Step ${index + 1}</h4>
-                    <p>${step}</p>
-                </div>
-            </div>
-        `).join('');
-
-        stepsContainer.innerHTML = stepsHTML;
-    }
-
-    generateReportLink(code) {
-        const baseURL = window.location.origin + window.location.pathname;
-        const reportURL = `${baseURL}?report=${code}`;
-        
-        const linkContainer = document.getElementById('generated-link');
-        if (linkContainer) {
-            linkContainer.innerHTML = `
-                <strong>Report Generated Successfully!</strong><br>
-                <a href="${reportURL}" target="_blank">${reportURL}</a><br>
-                <small>Share this link with your vendor</small>
-            `;
-        }
-    }
-
-    saveReportData(code, data) {
+    storeReportData(code, data) {
         const reports = JSON.parse(localStorage.getItem('whitefoxReports') || '{}');
         reports[code] = {
             ...data,
@@ -476,24 +402,27 @@ class WhitefoxVendorReports {
     }
 
     loadDefaultSample() {
-        // Force refresh buyer data - Load WF053 - 8/53 Darrambal Street data
+        // Load WF053 - 8/53 Darrambal Street data - COMPLETE REBUILD FROM ACTUAL PDFs
         const sampleData = {
             address: "8/53 Darrambal Street, Chevron Island",
             campaignData: `
-                COMBINED PLATFORM PERFORMANCE (Domain + REA + WHITEFOX):
-                • Domain Views: 267 (reporting period Mar 23 - Apr 7)
-                • REA Views: 1,042 (REA platform reporting)
-                • Total Leads Generated: 10 (WHITEFOX system tracking)
-                • Domain Enquiries: 2 (1 email, 1 phone call from mobile)
-                • Photo Engagement: 2,617 photo views (Domain)
-                • Content Views: 51 floorplan views, 49 eBrochure views
-                • Open Homes Held: 2 sessions
-                • Total Inspection Attendance: 5 viewers across all opens
-                • Social Media Reach: 2,244 people reached, 6,990 ad impressions
-                • Shortlisted/Saved: 5 active watchers, 1 address copied
-                • Campaign Duration: 78 days on market, 16 days live online (Mar 23-Apr 7)
+                COMPLETE PLATFORM PERFORMANCE (Domain + REA + WHITEFOX):
                 
-                Excellent dual-platform performance with 10 qualified leads from 267+ Domain views. Multiple strong interest buyers including Khrishna O. ($1M offer potential) and Veronique F. (broker consultation). Campaign momentum building with broker consultations and finance applications in progress.
+                ▪ Domain Views: 267 (reporting period Mar 23 - Apr 7, 2026)
+                ▪ REA Views: 1,042 (REA platform reporting)
+                ▪ Total Engagement: 2,717 combined interactions
+                ▪ Photo Views: 2,617 (Domain)
+                ▪ Floorplan Views: 51 | eBrochure Views: 49
+                ▪ Total Leads Generated: 10 (WHITEFOX CRM tracking)
+                ▪ Domain Enquiries: 2 (1 email, 1 phone call from mobile)
+                ▪ Open Homes Held: 2 sessions
+                ▪ Total Inspection Attendance: 5 viewers
+                ▪ Social Media Reach: 6,990 ad impressions, 2,244 people reached
+                ▪ Shortlisted/Saved: 5 active watchers, 1 address copied
+                ▪ Campaign Duration: 78 days on market, 16 days live online
+                ▪ Listing Performance: 77 views from social media campaigns
+                
+                Strong dual-platform performance with 1,309 total views (Domain 267 + REA 1,042) converting to 10 qualified leads. Excellent social media amplification with 6,990 impressions reaching 2,244 people. Photo engagement exceptional at 2,617 views indicating high buyer interest in property presentation.
             `,
             buyerPositioning: `
                 STRONG INTEREST (3 buyers):
@@ -543,32 +472,86 @@ class WhitefoxVendorReports {
                 Same buyer as Raquel - duplicate lead identified
             `,
             marketAnalysis: `
-                Recent comparable sales analysis shows strong market fundamentals in the Jefferson Lane precinct.
-                Properties of similar quality have achieved premium pricing, with buyer demand remaining consistent
-                despite broader market conditions. Three recent sales provide strong benchmarks for positioning.
+                Recent Chevron Island comparable sales demonstrate strong market fundamentals in the Darrambal Street precinct.
+                
+                ▪ 39/53 Darrambal Street: Sold $1,200,000 (February 9, 2025)
+                ▪ 41/53 Darrambal Street: Sold $1,100,000 (July 10, 2025)  
+                ▪ 56/53 Darrambal Street: Sold $1,000,000 (January 23, 2026)
+                
+                Properties of similar quality and layout have achieved premium pricing between $1M-$1.2M, with buyer demand remaining consistent despite broader market conditions. Three recent sales in the same complex provide strong benchmarks for current positioning in the $1.1M-$1.2M price guide range.
             `,
             nextSteps: `
-                Review pricing strategy based on current buyer feedback
-                Consider staging improvements for upcoming open homes
-                Implement targeted marketing to serious buyer segments
-                Schedule follow-up calls with interested parties
-                Prepare for potential negotiations with qualified buyers
+                ▪ Weekend open home confirmation for Glen W. (finance-dependent but high interest)
+                ▪ Follow-up with Khrishna O. on contract discussions ($1M offer potential, $1.2M capacity)
+                ▪ Await Veronique F. broker consultation outcome ($1M-$1.1M indication)
+                ▪ Strategic follow-up with 4 moderate interest buyers (inspection attendees)
+                ▪ Prepare contract documentation for serious enquiries
+                ▪ Review pricing strategy based on multiple buyers in $1M-$1.2M range
+                ▪ Implement targeted follow-up sequence for qualified leads
             `,
             executiveSummary: `
-                Campaign delivering exceptional results with 10 qualified buyers across 78 days on market, 16 days live online across Domain and REA platforms.
+                Outstanding campaign performance with 10 qualified buyers generated from 1,309 total platform views (Domain 267 + REA 1,042) across 78 days on market with 16 days active online marketing.
                 
-                Key highlights: Strong buyer pipeline with 3 high-interest prospects including Khrishna O. ($1M offer potential, has capacity to $1.2M), Veronique F. (broker consultation in progress, $1M-$1.1M range), and Glen W. (finance-dependent, weekend inspection requested). 
+                Key highlights: Premium buyer pipeline including Khrishna O. ($1M offer potential with $1.2M capacity), Veronique F. (active broker consultation, $1M-$1.1M range), and Glen W. (finance-dependent, weekend inspection confirmed). 4 additional buyers attended physical inspections demonstrating genuine interest.
                 
-                Campaign metrics: 267 Domain views, 2,617 photo engagement, 6,990 social impressions reaching 2,244 people. 4 buyers attended physical inspections (Graeme F., Michelle H., Veronique F., Raquel R.).
+                Market positioning: Multiple buyers demonstrating serious interest in the $1M-$1.2M range perfectly aligns with recent comparable sales in the same complex ($1M-$1.2M achieved). Active broker consultations and finance applications indicate imminent purchase decisions.
                 
-                Market positioning: Multiple buyers showing genuine interest in $1M-$1.2M range aligns with vendor expectations. Active broker consultations and finance applications indicate serious purchase intent.
+                Campaign metrics: Exceptional social media amplification (6,990 impressions, 2,244 people reached), high photo engagement (2,617 views), and strong conversion rate (10 leads from 1,309 views = 0.76% conversion rate).
                 
-                Next steps: Weekend open confirmed for Glen W., follow-up with Khrishna O. on contract discussions, await Veronique F. broker outcome. Strong foundation established for offer generation.
+                Recommendation: Strong foundation established for offer generation within 7-14 days based on current buyer activity and market positioning. Weekend open home critical for Glen W. progression, Khrishna O. contract discussions priority.
             `
         };
 
         this.updateReportContent(sampleData);
         this.loadSampleComparables();
+        
+        // Load buyer profiles using the new complete data
+        const profiles = this.createSampleProfiles();
+        this.displayBuyerProfiles(profiles);
+    }
+
+    displayBuyerProfiles(profiles) {
+        // Update strong interest buyers
+        const strongProfile = document.getElementById('strong-buyer-profiles');
+        if (strongProfile) {
+            strongProfile.innerHTML = profiles.strong.map(buyer => `
+                <div class="buyer-profile">
+                    <div class="buyer-name">${buyer.name}</div>
+                    <div class="buyer-type">${buyer.type}</div>
+                    <div class="buyer-details">${buyer.details}</div>
+                    <div class="buyer-status">${buyer.status}</div>
+                </div>
+            `).join('');
+            document.getElementById('strong-buyers').textContent = profiles.strong.length;
+        }
+
+        // Update moderate interest buyers
+        const moderateProfile = document.getElementById('moderate-buyer-profiles');
+        if (moderateProfile) {
+            moderateProfile.innerHTML = profiles.moderate.map(buyer => `
+                <div class="buyer-profile">
+                    <div class="buyer-name">${buyer.name}</div>
+                    <div class="buyer-type">${buyer.type}</div>
+                    <div class="buyer-details">${buyer.details}</div>
+                    <div class="buyer-status">${buyer.status}</div>
+                </div>
+            `).join('');
+            document.getElementById('moderate-buyers').textContent = profiles.moderate.length;
+        }
+
+        // Update cold buyers
+        const coldProfile = document.getElementById('cold-buyer-profiles');
+        if (coldProfile) {
+            coldProfile.innerHTML = profiles.cold.map(buyer => `
+                <div class="buyer-profile">
+                    <div class="buyer-name">${buyer.name}</div>
+                    <div class="buyer-type">${buyer.type}</div>
+                    <div class="buyer-details">${buyer.details}</div>
+                    <div class="buyer-status">${buyer.status}</div>
+                </div>
+            `).join('');
+            document.getElementById('cold-buyers').textContent = profiles.cold.length;
+        }
     }
 
     loadSampleComparables() {
@@ -584,7 +567,6 @@ class WhitefoxVendorReports {
                         <p class="property-specs">Similar layout and finishes</p>
                         <p class="property-price">$1,200,000</p>
                         <p class="property-history">Sold February 9, 2025</p>
-                        <a href="#" class="property-link">View Sale Details</a>
                     </div>
                 </div>
                 <div class="comparable-property">
@@ -593,10 +575,9 @@ class WhitefoxVendorReports {
                     </div>
                     <div class="property-details">
                         <h4>41/53 Darrambal Street, Chevron Island</h4>
-                        <p class="property-specs">Same building complex</p>
+                        <p class="property-specs">Similar configuration</p>
                         <p class="property-price">$1,100,000</p>
                         <p class="property-history">Sold July 10, 2025</p>
-                        <a href="#" class="property-link">View Sale Details</a>
                     </div>
                 </div>
                 <div class="comparable-property">
@@ -605,10 +586,9 @@ class WhitefoxVendorReports {
                     </div>
                     <div class="property-details">
                         <h4>56/53 Darrambal Street, Chevron Island</h4>
-                        <p class="property-specs">Most recent sale in building</p>
+                        <p class="property-specs">Recent sale, similar quality</p>
                         <p class="property-price">$1,000,000</p>
                         <p class="property-history">Sold January 23, 2026</p>
-                        <a href="#" class="property-link">View Sale Details</a>
                     </div>
                 </div>
             `;
@@ -616,36 +596,7 @@ class WhitefoxVendorReports {
     }
 }
 
-// Initialize application
+// Initialize the platform when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new WhitefoxVendorReports();
+    new VendorReportPlatform();
 });
-
-// Smooth animations on scroll
-window.addEventListener('load', () => {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('section:not(.hero)').forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(30px)';
-        section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        observer.observe(section);
-    });
-});
-
-// Export for external use
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = WhitefoxVendorReports;
-}
