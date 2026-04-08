@@ -21,7 +21,7 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Loew', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--white);
     color: var(--black);
     line-height: 1.5;
@@ -98,8 +98,9 @@ body {
 }
 
 .property-info h1 {
+    font-family: 'Loew', sans-serif;
     font-size: 4rem;
-    font-weight: 900;
+    font-weight: 950; /* Loew Black */
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
     text-transform: uppercase;
@@ -124,8 +125,9 @@ body {
 }
 
 .section-header h2 {
+    font-family: 'Loew', sans-serif;
     font-size: 3rem;
-    font-weight: 900;
+    font-weight: 900; /* Loew Heavy */
     letter-spacing: -0.02em;
     margin-bottom: 0.5rem;
 }
@@ -143,8 +145,9 @@ body {
 }
 
 .deal-content h3 {
+    font-family: 'Loew', sans-serif;
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 800; /* Loew ExtraBold */
     margin-bottom: 2rem;
     text-transform: uppercase;
     letter-spacing: -0.01em;
