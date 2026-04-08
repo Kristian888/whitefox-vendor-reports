@@ -708,43 +708,95 @@ body {
 
 .buyer-category {
     background: var(--white);
-    padding: 3rem 2rem;
+    padding: 0;
+    overflow: hidden;
+}
+
+.category-header {
+    background: var(--black);
+    color: var(--white);
+    padding: 2rem;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .buyer-category h3 {
     font-family: 'Loew', sans-serif;
     font-weight: 500;
-    margin-bottom: 2rem;
-    font-size: 1.5rem;
-    color: var(--black);
+    font-size: 1.3rem;
+    color: var(--white);
+    margin: 0;
 }
 
 .buyer-count {
     font-family: 'Loew', sans-serif;
-    font-size: 4rem;
+    font-size: 2rem;
     font-weight: 300;
-    margin-bottom: 2rem;
-    color: var(--black);
+    color: var(--white);
 }
 
-.strong-interest {
-    border-left: 4px solid var(--success);
+.strong-interest .category-header {
+    background: var(--success);
 }
 
-.moderate-interest {
-    border-left: 4px solid var(--warning);
+.moderate-interest .category-header {
+    background: var(--warning);
 }
 
-.low-interest {
-    border-left: 4px solid var(--grey-light);
+.low-interest .category-header {
+    background: var(--grey-medium);
 }
 
 .buyer-profiles {
-    text-align: left;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.buyer-profile {
+    border-bottom: 1px solid var(--grey-lightest);
+    padding-bottom: 1.5rem;
+}
+
+.buyer-profile:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.buyer-name {
+    font-family: 'Loew', sans-serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+}
+
+.buyer-type {
     font-size: 0.9rem;
+    color: var(--grey-light);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.buyer-details {
+    font-size: 0.95rem;
     line-height: 1.6;
     color: var(--grey-medium);
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.buyer-status {
+    font-size: 0.8rem;
+    color: var(--grey-light);
+    font-weight: 500;
 }
 
 .positioning-analysis {

@@ -56,19 +56,46 @@ Enquiry quality is high with 18 of 28 requesting second inspections.
 ### Buyer Positioning:
 ```
 STRONG INTEREST (6 buyers):
-• Young professional couple, Robina - "Love everything about it, wouldn't pay over $1.95M but very serious"
-• Downsizer, Surfers Paradise - Currently renting, wants to move quickly, considering full asking price
-• Interstate investor - Flew up specifically for this property, bringing family next weekend
+
+James K. - Young Professional Couple
+"Love everything about it, wouldn't pay over $1.95M but very serious about proceeding. Looking to move within 3 months."
+Last contacted: 2 days ago
+
+Margaret S. - Downsizing Couple  
+"Perfect size and location. Currently renting, wants to move quickly. Considering full asking price offer."
+Second inspection scheduled
+
+David R. - Interstate Investor
+"Flew up specifically for this property. Bringing family next weekend for final decision. Very keen."
+Family inspection arranged
 
 MODERATE INTEREST (8 buyers):
-• Local family upgrading - Like the location, concerned about ongoing strata costs ($180/week)
-• First home buyers - "Perfect size and location" but need to sell current property first
-• Retiree couple - Interested but want to see 2-3 more options before deciding
+
+Sarah M. - Local Family
+"Perfect location for kids' school. Concerned about ongoing strata costs but considering making an offer pending finance approval."
+Requires follow-up call
+
+Andrew T. - First Home Buyers
+"Love the property but need to sell current home first. Timeline is flexible, looking at 4-6 month settlement."
+Pending property sale
+
+Linda B. - Retiree Couple
+"Interested in the location and lifestyle. Want to see 2-3 more options before making final decision."
+Considering other options
 
 RULED OUT/COLD (14 buyers):
-• Price-sensitive segment - "Love it but wouldn't pay above $1.8M" 
-• Space-focused buyers - Need minimum 3 bedrooms, have moved on to other options
-• Parking concerns - 4 buyers specifically ruled out due to single car accommodation
+
+Michael T. - Price-Sensitive Buyer
+"Love the property but wouldn't pay above $1.8M. Have moved on to look at other options in the area."
+No further contact required
+
+Emma W. - Family with Space Needs
+"Beautiful apartment but need minimum 3 bedrooms for growing family. Looking at houses instead."
+Different property requirements
+
+Robert H. - Parking-Focused Buyer
+"Single car space is a deal-breaker. Need secure parking for 2 vehicles. Ruled out immediately."
+Specific requirement not met
 ```
 
 ### Market Analysis:

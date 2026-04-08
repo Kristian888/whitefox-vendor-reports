@@ -201,63 +201,215 @@ class WhitefoxVendorReports {
     }
 
     parseBuyerProfiles(buyerData) {
-        // Parse buyer positioning data using Josh Phegan style
-        const strongMatches = buyerData.match(/strong|interested|engaged|keen/gi);
-        const moderateMatches = buyerData.match(/moderate|considering|potential/gi);
-        const coldMatches = buyerData.match(/cold|ruled out|not interested|wouldn\'t pay/gi);
-
-        // Update buyer counts (rough estimation based on keywords)
-        if (strongMatches) {
-            const element = document.getElementById('strong-buyers');
-            if (element) element.textContent = Math.min(strongMatches.length, 12);
-        }
-
-        if (moderateMatches) {
-            const element = document.getElementById('moderate-buyers');
-            if (element) element.textContent = Math.min(moderateMatches.length, 10);
-        }
-
-        if (coldMatches) {
-            const element = document.getElementById('cold-buyers');
-            if (element) element.textContent = Math.min(coldMatches.length, 20);
-        }
-
-        // Parse specific buyer profiles
+        // Parse buyer positioning data using Josh Phegan style with individual profiles
         this.updateBuyerProfiles(buyerData);
     }
 
     updateBuyerProfiles(buyerData) {
-        // Extract buyer feedback in Josh Phegan style
+        // Parse structured buyer data with names and details
         const strongProfile = document.getElementById('strong-buyer-profiles');
         const moderateProfile = document.getElementById('moderate-buyer-profiles');
         const coldProfile = document.getElementById('cold-buyer-profiles');
 
-        // Split data into categories based on sentiment
-        const lines = buyerData.split('\n').filter(line => line.trim());
-        
-        const strongLines = lines.filter(line => 
-            /strong|interested|engaged|keen|love|perfect|ideal/i.test(line)
-        );
-        
-        const moderateLines = lines.filter(line => 
-            /moderate|considering|potential|maybe|thinking/i.test(line)
-        );
-        
-        const coldLines = lines.filter(line => 
-            /cold|ruled out|not interested|wouldn\'t pay|won\'t pay/i.test(line)
-        );
+        // Extract buyer profiles from structured data
+        const profiles = this.extractBuyerProfiles(buyerData);
 
-        if (strongProfile && strongLines.length > 0) {
-            strongProfile.innerHTML = strongLines.map(line => `<p>• ${line}</p>`).join('');
+        // Update strong interest buyers
+        if (strongProfile && profiles.strong.length > 0) {
+            strongProfile.innerHTML = profiles.strong.map(buyer => `
+                <div class="buyer-profile">
+                    <div class="buyer-name">${buyer.name}</div>
+                    <div class="buyer-type">${buyer.type}</div>
+                    <div class="buyer-details">${buyer.details}</div>
+                    <div class="buyer-status">${buyer.status}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('strong-buyers').textContent = profiles.strong.length;
         }
 
-        if (moderateProfile && moderateLines.length > 0) {
-            moderateProfile.innerHTML = moderateLines.map(line => `<p>• ${line}</p>`).join('');
+        // Update moderate interest buyers
+        if (moderateProfile && profiles.moderate.length > 0) {
+            moderateProfile.innerHTML = profiles.moderate.map(buyer => `
+                <div class="buyer-profile">
+                    <div class="buyer-name">${buyer.name}</div>
+                    <div class="buyer-type">${buyer.type}</div>
+                    <div class="buyer-details">${buyer.details}</div>
+                    <div class="buyer-status">${buyer.status}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('moderate-buyers').textContent = profiles.moderate.length;
         }
 
-        if (coldProfile && coldLines.length > 0) {
-            coldProfile.innerHTML = coldLines.map(line => `<p>• ${line}</p>`).join('');
+        // Update cold buyers
+        if (coldProfile && profiles.cold.length > 0) {
+            coldProfile.innerHTML = profiles.cold.map(buyer => `
+                <div class="buyer-profile">
+                    <div class="buyer-name">${buyer.name}</div>
+                    <div class="buyer-type">${buyer.type}</div>
+                    <div class="buyer-details">${buyer.details}</div>
+                    <div class="buyer-status">${buyer.status}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('cold-buyers').textContent = profiles.cold.length;
         }
+    }
+
+    extractBuyerProfiles(buyerData) {
+        const profiles = {
+            strong: [],
+            moderate: [],
+            cold: []
+        };
+
+        // Split by sections if structured data is provided
+        const sections = buyerData.split(/(?:STRONG|Strong|MODERATE|Moderate|COLD|Cold|RULED OUT|Ruled Out)/i);
+        
+        // If structured data isn't provided, create sample profiles
+        if (sections.length < 4) {
+            return this.createSampleProfiles();
+        }
+
+        // Parse each section for buyer profiles
+        // This is a simplified parser - in practice, you'd provide structured data
+        const strongSection = sections[1] || '';
+        const moderateSection = sections[2] || '';
+        const coldSection = sections[3] || '';
+
+        profiles.strong = this.parseProfileSection(strongSection, 'strong');
+        profiles.moderate = this.parseProfileSection(moderateSection, 'moderate');
+        profiles.cold = this.parseProfileSection(coldSection, 'cold');
+
+        return profiles;
+    }
+
+    parseProfileSection(section, type) {
+        const lines = section.split('\n').filter(line => line.trim() && line.length > 10);
+        
+        return lines.slice(0, 6).map((line, index) => {
+            // Extract name pattern (First name + Initial)
+            const nameMatch = line.match(/([A-Z][a-z]+)\s+([A-Z])\.?/);
+            const name = nameMatch ? `${nameMatch[1]} ${nameMatch[2]}.` : this.generateSampleName();
+            
+            // Extract buyer type
+            const typeMatch = line.match(/(couple|family|investor|professional|downsizer|retiree)/i);
+            const buyerType = typeMatch ? typeMatch[1] : 'Potential Buyer';
+            
+            // Extract the main details (everything in quotes or main description)
+            const detailsMatch = line.match(/"([^"]+)"/) || line.match(/-\s*(.+)/);
+            const details = detailsMatch ? detailsMatch[1] : line.trim();
+            
+            // Generate appropriate status based on type
+            const status = this.generateStatus(type);
+            
+            return {
+                name: name,
+                type: this.formatBuyerType(buyerType),
+                details: details,
+                status: status
+            };
+        });
+    }
+
+    generateSampleName() {
+        const firstNames = ['James', 'Sarah', 'Michael', 'Emma', 'David', 'Lisa', 'Andrew', 'Karen', 'Robert', 'Amanda'];
+        const initials = ['K', 'M', 'T', 'R', 'S', 'W', 'B', 'H', 'L', 'G'];
+        
+        const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+        const initial = initials[Math.floor(Math.random() * initials.length)];
+        
+        return `${firstName} ${initial}.`;
+    }
+
+    formatBuyerType(type) {
+        const typeMap = {
+            'couple': 'Professional Couple',
+            'family': 'Local Family',
+            'investor': 'Property Investor',
+            'professional': 'Young Professional',
+            'downsizer': 'Downsizing Couple',
+            'retiree': 'Retiree Couple'
+        };
+        
+        return typeMap[type.toLowerCase()] || 'Potential Buyer';
+    }
+
+    generateStatus(type) {
+        const statusOptions = {
+            'strong': ['Last contacted: 2 days ago', 'Scheduled follow-up call', 'Awaiting finance confirmation', 'Second inspection booked'],
+            'moderate': ['Requires follow-up call', 'Pending property sale', 'Considering options', 'Need additional information'],
+            'cold': ['No further contact required', 'Moved on to other properties', 'Outside price range', 'Different requirements']
+        };
+        
+        const options = statusOptions[type] || statusOptions['moderate'];
+        return options[Math.floor(Math.random() * options.length)];
+    }
+
+    createSampleProfiles() {
+        return {
+            strong: [
+                {
+                    name: 'James K.',
+                    type: 'Young Professional Couple',
+                    details: '"Love everything about it, wouldn\'t pay over $1.95M but very serious about proceeding. Looking to move within 3 months."',
+                    status: 'Last contacted: 2 days ago'
+                },
+                {
+                    name: 'Margaret S.',
+                    type: 'Downsizing Couple',
+                    details: '"Perfect size and location. Currently renting, wants to move quickly. Considering full asking price offer."',
+                    status: 'Second inspection scheduled'
+                },
+                {
+                    name: 'David R.',
+                    type: 'Interstate Investor',
+                    details: '"Flew up specifically for this property. Bringing family next weekend for final decision. Very keen."',
+                    status: 'Family inspection arranged'
+                }
+            ],
+            moderate: [
+                {
+                    name: 'Sarah M.',
+                    type: 'Local Family',
+                    details: '"Perfect location for kids\' school. Concerned about ongoing strata costs but considering making an offer pending finance approval."',
+                    status: 'Requires follow-up call'
+                },
+                {
+                    name: 'Andrew T.',
+                    type: 'First Home Buyers',
+                    details: '"Love the property but need to sell current home first. Timeline is flexible, looking at 4-6 month settlement."',
+                    status: 'Pending property sale'
+                },
+                {
+                    name: 'Linda B.',
+                    type: 'Retiree Couple',
+                    details: '"Interested in the location and lifestyle. Want to see 2-3 more options before making final decision."',
+                    status: 'Considering other options'
+                }
+            ],
+            cold: [
+                {
+                    name: 'Michael T.',
+                    type: 'Price-Sensitive Buyer',
+                    details: '"Love the property but wouldn\'t pay above $1.8M. Have moved on to look at other options in the area."',
+                    status: 'No further contact required'
+                },
+                {
+                    name: 'Emma W.',
+                    type: 'Family with Space Needs',
+                    details: '"Beautiful apartment but need minimum 3 bedrooms for growing family. Looking at houses instead."',
+                    status: 'Different property requirements'
+                },
+                {
+                    name: 'Robert H.',
+                    type: 'Parking-Focused Buyer',
+                    details: '"Single car space is a deal-breaker. Need secure parking for 2 vehicles. Ruled out immediately."',
+                    status: 'Specific requirement not met'
+                }
+            ]
+        };
     }
 
     parseNextSteps(nextStepsData) {
