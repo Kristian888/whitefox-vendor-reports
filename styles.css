@@ -85,11 +85,22 @@ body {
 
 .whitefox-branding {
     align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-end;
 }
 
 .logo {
-    height: 40px;
     filter: brightness(0) invert(1);
+}
+
+.main-logo {
+    height: 60px;
+}
+
+.secondary-logo {
+    height: 40px;
 }
 
 .property-info {
@@ -459,9 +470,22 @@ body {
     gap: 2rem;
 }
 
+.footer-logos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 .footer-logo {
-    height: 30px;
     filter: brightness(0) invert(1);
+}
+
+.footer-logo.main {
+    height: 35px;
+}
+
+.footer-logo.secondary {
+    height: 25px;
 }
 
 .footer-brand p {

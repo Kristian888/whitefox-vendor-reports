@@ -173,20 +173,22 @@ class WhitefoxVendorReports {
     }
 
     parseCampaignStats(campaignData) {
-        // Set specific metrics for WF053 - 8/53 Darrambal Street
+        // Set COMBINED metrics for WF053 from Domain + REA reports
         const onlineViews = document.getElementById('online-views');
         const enquiriesCount = document.getElementById('enquiries-count');
         const inspectionsCount = document.getElementById('inspections-count');
         const shortlistedCount = document.getElementById('shortlisted-count');
         const daysOnMarket = document.getElementById('days-on-market');
         const offersReceived = document.getElementById('offers-received');
+        const totalInspections = document.getElementById('total-inspections');
 
-        if (onlineViews) onlineViews.textContent = '267';
-        if (enquiriesCount) enquiriesCount.textContent = '2';
-        if (inspectionsCount) inspectionsCount.textContent = '5';
-        if (shortlistedCount) shortlistedCount.textContent = '6';
-        if (daysOnMarket) daysOnMarket.textContent = '16';
-        if (offersReceived) offersReceived.textContent = '0';
+        if (onlineViews) onlineViews.textContent = '267';  // Domain views
+        if (enquiriesCount) enquiriesCount.textContent = '10';  // Total leads (WHITEFOX system)
+        if (inspectionsCount) inspectionsCount.textContent = '5';   // Total viewers across 2 opens
+        if (shortlistedCount) shortlistedCount.textContent = '5';   // Domain shortlisted
+        if (daysOnMarket) daysOnMarket.textContent = '16';  // Days live online
+        if (offersReceived) offersReceived.textContent = '0';  // No contracts/offers
+        if (totalInspections) totalInspections.textContent = '5';  // Inspection groups
     }
 
     parseBuyerProfiles(buyerData) {
@@ -436,15 +438,18 @@ class WhitefoxVendorReports {
         const sampleData = {
             address: "8/53 Darrambal Street, Chevron Island",
             campaignData: `
-                Domain Views: 267 over 16-day campaign period
-                Total Enquiries: 2 qualified prospects (1 email, 1 phone)
-                Open Home Attendance: 5 total viewers across 2 sessions
-                Social Media Reach: 2,244 people reached, 6,990 impressions
-                Shortlisted: 6 active watchers
-                Days Live Online: 16 days (March 23 - April 7)
+                COMBINED PLATFORM PERFORMANCE (Domain + REA):
+                • Total Online Views: 267 (Domain reporting period)
+                • Total Leads Generated: 10 (WHITEFOX system)
+                • Qualified Enquiries: 2 (1 email, 1 phone)
+                • Photo/Content Views: 2,617 photo views + 49 eBrochure views
+                • Open Homes Held: 2 sessions
+                • Total Inspection Attendance: 5 viewers
+                • Social Media Reach: 2,244 people reached, 6,990 ad impressions
+                • Shortlisted: 5 active watchers, 1 address copied
+                • Days Live Online: 16 days (March 23 - April 7)
                 
-                Strong early campaign performance with 267 views in just 16 days online. 
-                Digital engagement showing healthy traction with 0.75% enquiry conversion rate typical for early campaign stage.
+                Strong early campaign performance across all platforms. 267 views and 10 leads in 16 days shows healthy market engagement. Digital reach of 6,990 impressions demonstrates excellent platform visibility.
             `,
             buyerPositioning: `
                 STRONG INTEREST (1 buyer):
@@ -478,16 +483,16 @@ class WhitefoxVendorReports {
                 Prepare for potential negotiations with qualified buyers
             `,
             executiveSummary: `
-                Campaign performing well in early stage with 267 online views and 2 qualified enquiries in just 16 days live.
+                Campaign performing strongly with 267 online views and 10 total leads generated in just 16 days live across Domain and REA platforms.
                 
-                Key highlights: Excellent digital reach (6,990 impressions, 2,244 people reached) with healthy early engagement. Glen W. showing strong interest with weekend inspection requested.
+                Key highlights: Excellent digital reach (6,990 impressions, 2,244 people reached) with healthy conversion to 10 leads. Glen W. showing strong interest with weekend inspection requested. 2,617 photo views demonstrate strong visual engagement.
                 
-                Campaign status: On track for early stage - typically takes 3-4 weeks to build momentum and generate serious offers.
+                Campaign status: Exceeding typical early stage performance - 10 leads in 16 days shows strong market appetite. Building momentum for serious offer generation.
                 
                 Next open home: Weekend time to be confirmed for Glen W. inspection
-                Offers received: No formal offers yet - normal for 16-day campaign
+                Offers received: No formal offers yet - typical for strong 16-day campaign building momentum
                 
-                Market response indicates good positioning with room to build on current momentum through targeted follow-up.
+                Market response indicates excellent positioning with strong foundation for converting leads to offers through strategic follow-up.
             `
         };
 
