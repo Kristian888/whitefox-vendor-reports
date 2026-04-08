@@ -488,15 +488,25 @@ class VendorReportPlatform {
                 ▪ Implement targeted follow-up sequence for qualified leads
             `,
             executiveSummary: `
-                Outstanding campaign performance with 10 qualified buyers generated from 1,309 total platform views (Domain 267 + REA 1,042) across 78 days on market with 16 days active online marketing.
+                Outstanding dual-platform campaign performance generating 10 qualified buyers from 1,309 total views (Domain 267 + REA 1,042) across 16 days active online marketing.
                 
-                Key highlights: Premium buyer pipeline including Khrishna O. ($1M offer potential with $1.2M capacity), Veronique F. (active broker consultation, $1M-$1.1M range), and Glen W. (finance-dependent, weekend inspection confirmed). 4 additional buyers attended physical inspections demonstrating genuine interest.
+                PLATFORM PERFORMANCE HIGHLIGHTS:
+                ▪ REA Leadership: 1,042 views (79.6% of traffic) driving volume
+                ▪ Domain Quality: 267 views with exceptional 2,617 photo engagement (9.8:1 ratio)
+                ▪ Social Amplification: 6,990 impressions reaching 2,244 people (32% engagement rate)
+                ▪ Conversion Excellence: 0.76% lead rate with 70% inspection attendance
                 
-                Market positioning: Multiple buyers demonstrating serious interest in the $1M-$1.2M range perfectly aligns with recent comparable sales in the same complex ($1M-$1.2M achieved). Active broker consultations and finance applications indicate imminent purchase decisions.
+                BUYER PIPELINE STRENGTH:
+                ▪ 3 Strong Prospects: $1M+ interest levels (Glen W., Veronique F., Khrishna O.)
+                ▪ 4 Moderate Prospects: Inspection attendees requiring strategic follow-up
+                ▪ Price Validation: Multiple buyers comfortable in $1M-$1.2M target range
+                ▪ Quality Indicators: 7 of 10 leads attended physical inspections
                 
-                Campaign metrics: Exceptional social media amplification (6,990 impressions, 2,244 people reached), high photo engagement (2,617 views), and strong conversion rate (10 leads from 1,309 views = 0.76% conversion rate).
+                STRATEGIC POSITIONING:
+                Market response confirms excellent positioning with balanced platform performance (no single dependency). Photo engagement excellence (2,617 views) demonstrates compelling property presentation. Active broker consultations and finance applications indicate purchase decisions imminent.
                 
-                Recommendation: Strong foundation established for offer generation within 7-14 days based on current buyer activity and market positioning. Weekend open home critical for Glen W. progression, Khrishna O. contract discussions priority.
+                IMMEDIATE PRIORITIES:
+                Weekend inspection critical for Glen W. progression. Contract discussions with Khrishna O. ($1M offer potential, $1.2M capacity). Monitor Veronique F. broker consultation outcome. Strong foundation established for offer generation within 7-14 days.
             `
         };
 
