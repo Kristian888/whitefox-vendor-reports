@@ -476,13 +476,13 @@ class WhitefoxVendorReports {
     }
 
     loadDefaultSample() {
-        // Load WF053 - 8/53 Darrambal Street data
+        // Force refresh buyer data - Load WF053 - 8/53 Darrambal Street data
         const sampleData = {
             address: "8/53 Darrambal Street, Chevron Island",
             campaignData: `
                 COMBINED PLATFORM PERFORMANCE (Domain + REA + WHITEFOX):
                 • Domain Views: 267 (reporting period Mar 23 - Apr 7)
-                • REA Views: 1,042 (to be confirmed from additional reporting)
+                • REA Views: 1,042 (REA platform reporting)
                 • Total Leads Generated: 10 (WHITEFOX system tracking)
                 • Domain Enquiries: 2 (1 email, 1 phone call from mobile)
                 • Photo Engagement: 2,617 photo views (Domain)
