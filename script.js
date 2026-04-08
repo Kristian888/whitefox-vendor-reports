@@ -185,7 +185,7 @@ class WhitefoxVendorReports {
         if (enquiriesCount) enquiriesCount.textContent = '2';
         if (inspectionsCount) inspectionsCount.textContent = '5';
         if (shortlistedCount) shortlistedCount.textContent = '6';
-        if (daysOnMarket) daysOnMarket.textContent = '78';
+        if (daysOnMarket) daysOnMarket.textContent = '16';
         if (offersReceived) offersReceived.textContent = '0';
     }
 
@@ -337,65 +337,30 @@ class WhitefoxVendorReports {
     }
 
     createSampleProfiles() {
+        // ACTUAL BUYERS from WF053 - 8/53 Darrambal Street PDF report
         return {
             strong: [
                 {
-                    name: 'James K.',
-                    type: 'Young Professional Couple',
-                    details: '"Love everything about it, wouldn\'t pay over $1.95M but very serious about proceeding. Looking to move within 3 months."',
-                    status: 'Last contacted: 2 days ago'
-                },
-                {
-                    name: 'Margaret S.',
-                    type: 'Downsizing Couple',
-                    details: '"Perfect size and location. Currently renting, wants to move quickly. Considering full asking price offer."',
-                    status: 'Second inspection scheduled'
-                },
-                {
-                    name: 'David R.',
-                    type: 'Interstate Investor',
-                    details: '"Flew up specifically for this property. Bringing family next weekend for final decision. Very keen."',
-                    status: 'Family inspection arranged'
+                    name: 'Glen W.',
+                    type: 'Finance-Dependent Buyer',
+                    details: '"Has interest, would be subject to finance, requested open home time to view the property this weekend."',
+                    status: 'Property documents sent, weekend inspection requested'
                 }
             ],
             moderate: [
                 {
-                    name: 'Sarah M.',
-                    type: 'Local Family',
-                    details: '"Perfect location for kids\' school. Concerned about ongoing strata costs but considering making an offer pending finance approval."',
-                    status: 'Requires follow-up call'
-                },
-                {
-                    name: 'Andrew T.',
-                    type: 'First Home Buyers',
-                    details: '"Love the property but need to sell current home first. Timeline is flexible, looking at 4-6 month settlement."',
-                    status: 'Pending property sale'
-                },
-                {
-                    name: 'Linda B.',
-                    type: 'Retiree Couple',
-                    details: '"Interested in the location and lifestyle. Want to see 2-3 more options before making final decision."',
-                    status: 'Considering other options'
+                    name: 'Graeme F.',
+                    type: 'Inspection Attendee',
+                    details: '"Attended inspection on April 4th. Follow-up call required to gauge genuine interest level and next steps."',
+                    status: 'Called no answer, SMS sent April 7th'
                 }
             ],
             cold: [
                 {
-                    name: 'Michael T.',
-                    type: 'Price-Sensitive Buyer',
-                    details: '"Love the property but wouldn\'t pay above $1.8M. Have moved on to look at other options in the area."',
-                    status: 'No further contact required'
-                },
-                {
-                    name: 'Emma W.',
-                    type: 'Family with Space Needs',
-                    details: '"Beautiful apartment but need minimum 3 bedrooms for growing family. Looking at houses instead."',
-                    status: 'Different property requirements'
-                },
-                {
-                    name: 'Robert H.',
-                    type: 'Parking-Focused Buyer',
-                    details: '"Single car space is a deal-breaker. Need secure parking for 2 vehicles. Ruled out immediately."',
-                    status: 'Specific requirement not met'
+                    name: 'Michelle H.',
+                    type: 'Minimal Engagement',
+                    details: '"Initial enquiry received but minimal follow-up engagement. Requires qualification to determine genuine interest."',
+                    status: 'Check-in contact only'
                 }
             ]
         };
@@ -471,34 +436,34 @@ class WhitefoxVendorReports {
         const sampleData = {
             address: "8/53 Darrambal Street, Chevron Island",
             campaignData: `
-                Domain Views: 267 over 16-day period
+                Domain Views: 267 over 16-day campaign period
                 Total Enquiries: 2 qualified prospects (1 email, 1 phone)
                 Open Home Attendance: 5 total viewers across 2 sessions
                 Social Media Reach: 2,244 people reached, 6,990 impressions
                 Shortlisted: 6 active watchers
-                Days on Market: 78 days
+                Days Live Online: 16 days (March 23 - April 7)
                 
-                Campaign has been running for 78 days with extended market exposure. 
-                Digital engagement shows consistent viewing but conversion to enquiries remains low at 0.75%.
+                Strong early campaign performance with 267 views in just 16 days online. 
+                Digital engagement showing healthy traction with 0.75% enquiry conversion rate typical for early campaign stage.
             `,
             buyerPositioning: `
                 STRONG INTEREST (1 buyer):
                 
                 Glen W. - Finance-Dependent Buyer
                 "Has interest, would be subject to finance, requested open home time to view the property this weekend."
-                Last contacted: April 8th, property documents sent
+                Property documents sent, weekend inspection requested
                 
                 MODERATE INTEREST (1 buyer):
                 
-                Graeme F. - Follow-Up Required
-                "Attended inspection, requires additional follow-up to gauge genuine interest level."
-                Status: Called no answer, SMS sent April 7th
+                Graeme F. - Inspection Attendee  
+                "Attended inspection on April 4th. Follow-up call required to gauge genuine interest level and next steps."
+                Called no answer, SMS sent April 7th
                 
                 RULED OUT/COLD (1 buyer):
                 
-                Michelle H. - Check-in Only
-                "Initial enquiry, minimal engagement, no specific feedback provided."
-                Status: Requires qualification call
+                Michelle H. - Minimal Engagement
+                "Initial enquiry received but minimal follow-up engagement. Requires qualification to determine genuine interest."
+                Check-in contact only
             `,
             marketAnalysis: `
                 Recent comparable sales analysis shows strong market fundamentals in the Jefferson Lane precinct.
@@ -513,16 +478,16 @@ class WhitefoxVendorReports {
                 Prepare for potential negotiations with qualified buyers
             `,
             executiveSummary: `
-                Campaign tracking after 78 days on market with 267 online views and 2 qualified enquiries.
+                Campaign performing well in early stage with 267 online views and 2 qualified enquiries in just 16 days live.
                 
-                Key insights: Strong digital reach (6,990 impressions, 2,244 people reached) but low conversion rate indicates positioning review needed.
+                Key highlights: Excellent digital reach (6,990 impressions, 2,244 people reached) with healthy early engagement. Glen W. showing strong interest with weekend inspection requested.
                 
-                Immediate concern: Extended time on market requires strategic discussion about approach and pricing.
+                Campaign status: On track for early stage - typically takes 3-4 weeks to build momentum and generate serious offers.
                 
                 Next open home: Weekend time to be confirmed for Glen W. inspection
-                Offers received: No formal offers received to date
+                Offers received: No formal offers yet - normal for 16-day campaign
                 
-                Market response suggests need for strategic repositioning and enhanced buyer engagement approach.
+                Market response indicates good positioning with room to build on current momentum through targeted follow-up.
             `
         };
 
@@ -536,38 +501,38 @@ class WhitefoxVendorReports {
             comparablesGrid.innerHTML = `
                 <div class="comparable-property">
                     <div class="property-image">
-                        <img src="https://via.placeholder.com/400x200?text=Property+Image" alt="5/148 Jefferson Lane" />
+                        <img src="https://via.placeholder.com/400x200?text=Property+Image" alt="39/53 Darrambal Street" />
                     </div>
                     <div class="property-details">
-                        <h4>5/148 Jefferson Lane, Palm Beach</h4>
-                        <p class="property-specs">2 bed • 2 bath • 1 car</p>
-                        <p class="property-price">$1,850,000</p>
-                        <p class="property-history">21 days on market • No price changes</p>
-                        <a href="#" class="property-link">View on REA</a>
+                        <h4>39/53 Darrambal Street, Chevron Island</h4>
+                        <p class="property-specs">Similar layout and finishes</p>
+                        <p class="property-price">$1,200,000</p>
+                        <p class="property-history">Sold February 9, 2025</p>
+                        <a href="#" class="property-link">View Sale Details</a>
                     </div>
                 </div>
                 <div class="comparable-property">
                     <div class="property-image">
-                        <img src="https://via.placeholder.com/400x200?text=Property+Image" alt="3/156 Jefferson Lane" />
+                        <img src="https://via.placeholder.com/400x200?text=Property+Image" alt="41/53 Darrambal Street" />
                     </div>
                     <div class="property-details">
-                        <h4>3/156 Jefferson Lane, Palm Beach</h4>
-                        <p class="property-specs">2 bed • 2 bath • 1 car</p>
-                        <p class="property-price">$1,920,000</p>
-                        <p class="property-history">14 days on market • Price reduced once</p>
-                        <a href="#" class="property-link">View on Domain</a>
+                        <h4>41/53 Darrambal Street, Chevron Island</h4>
+                        <p class="property-specs">Same building complex</p>
+                        <p class="property-price">$1,100,000</p>
+                        <p class="property-history">Sold July 10, 2025</p>
+                        <a href="#" class="property-link">View Sale Details</a>
                     </div>
                 </div>
                 <div class="comparable-property">
                     <div class="property-image">
-                        <img src="https://via.placeholder.com/400x200?text=Property+Image" alt="7/150 Jefferson Lane" />
+                        <img src="https://via.placeholder.com/400x200?text=Property+Image" alt="56/53 Darrambal Street" />
                     </div>
                     <div class="property-details">
-                        <h4>7/150 Jefferson Lane, Palm Beach</h4>
-                        <p class="property-specs">2 bed • 1 bath • 1 car</p>
-                        <p class="property-price">$1,750,000</p>
-                        <p class="property-history">28 days on market • Multiple price reductions</p>
-                        <a href="#" class="property-link">View Online</a>
+                        <h4>56/53 Darrambal Street, Chevron Island</h4>
+                        <p class="property-specs">Most recent sale in building</p>
+                        <p class="property-price">$1,000,000</p>
+                        <p class="property-history">Sold January 23, 2026</p>
+                        <a href="#" class="property-link">View Sale Details</a>
                     </div>
                 </div>
             `;
