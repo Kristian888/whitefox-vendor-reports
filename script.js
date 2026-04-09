@@ -406,21 +406,23 @@ class VendorReportPlatform {
         const sampleData = {
             address: "8/53 Darrambal Street, Chevron Island",
             campaignData: `
-                COMPLETE PLATFORM PERFORMANCE (Domain + REA + WHITEFOX):
+                COMPLETE PLATFORM PERFORMANCE (Domain + REA + WHITEFOX) - EXTRACTED FROM ACTUAL PDFs:
                 
                 ▪ Total Online Views: 1,309 (Domain 267 + REA 1,042)
-                ▪ Photo Views: 2,617 (Domain)
-                ▪ Floorplan Views: 51 | eBrochure Views: 49
-                ▪ Total Leads Generated: 10 (WHITEFOX CRM tracking)
-                ▪ Domain Enquiries: 2 (1 email, 1 phone call from mobile)
-                ▪ Open Homes Held: 2 sessions
-                ▪ Total Inspections: 5 individual attendees
-                ▪ Social Media Reach: 6,990 ad impressions, 2,244 people reached
-                ▪ Shortlisted/Saved: 5 active watchers, 1 address copied
-                ▪ Campaign Duration: 78 days on market, 16 days live online
-                ▪ Conversion Rate: 0.76% (10 leads from 1,309 total views)
+                ▪ REA Campaign Exposure: 18,262 total exposures (realestate.com.au + beyond)
+                ▪ Domain Photo Views: 2,617 | Floorplan Views: 51 | eBrochure Views: 49
+                ▪ REA eBrochures: 334 sent with 37 clicks (11% click rate)
+                ▪ REA Notifications: 4,911 people notified (saved searches, alerts, updates)
+                ▪ Total Combined Enquiries: 18 (Domain: 2, REA: 16 email/phone/SMS reveals)
+                ▪ WHITEFOX Leads Generated: 10 (CRM tracking from all sources)
+                ▪ Open Homes Held: 2 sessions, 5 individual inspection attendees
+                ▪ Social Media Reach: 6,990 ad impressions (Domain), 2,244 people reached
+                ▪ REA Social: 671 campaign clicks via Facebook, Instagram, news.com.au
+                ▪ Platform Engagement: 684% uplift to listing views (REA Audience Maximiser)
+                ▪ Shortlisted/Saved: 5 Domain + 24 REA saves/shares
+                ▪ Campaign Duration: 78 days on market, 16 days active online
                 
-                Strong dual-platform performance with 1,309 total online views converting to 10 qualified leads. Excellent social media amplification with 6,990 impressions reaching 2,244 people. Photo engagement exceptional at 2,617 views indicating high buyer interest in property presentation.
+                Exceptional dual-platform performance with 1,309 direct views supported by 18,262 REA exposures + 6,990 Domain social impressions. Combined reach exceeding 25,000 exposures with 18 total enquiries converting to 10 qualified WHITEFOX leads. REA delivered 16 enquiries vs Domain's 2, demonstrating platform strength distribution.
             `,
             buyerPositioning: `
                 STRONG INTEREST (3 buyers):
