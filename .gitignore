@@ -25,7 +25,7 @@ node_modules/
 
 # Large media files (use Git LFS if needed)
 *.mov
-*.mp4
+# *.mp4 - allowing property video for vendor reports
 *.avi
 *.mkv
 *.wmv
