@@ -1137,3 +1137,52 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* File Upload Styles */
+.file-upload-group {
+    margin-bottom: 1.5rem;
+}
+
+.file-upload-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.file-upload-group input[type="file"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.file-upload-group input[type="file"]:hover {
+    border-color: var(--accent);
+    background: #f5f5f5;
+}
+
+.file-upload-group input[type="file"]:focus {
+    outline: none;
+    border-color: var(--black);
+}
+
+.file-preview {
+    margin-top: 0.75rem;
+    min-height: 20px;
+    padding: 0.5rem;
+    background: #fafafa;
+    border-radius: 6px;
+    border: 1px solid #eee;
+}
+
+.file-upload-group small {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--grey-light);
+    font-size: 0.8rem;
+}

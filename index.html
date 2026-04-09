@@ -32,10 +32,18 @@
                 <!-- Agent Details -->
                 <div class="admin-section">
                     <h3>Agent Information</h3>
-                    <input type="file" id="agent-photo" accept="image/*" />
-                    <small>Agent profile photo</small>
-                    <input type="file" id="agent-video" accept="video/*" />
-                    <small>Personal video message to vendor</small>
+                    <div class="file-upload-group">
+                        <label for="agent-photo">Agent Profile Photo:</label>
+                        <input type="file" id="agent-photo" accept="image/*" />
+                        <small>Upload your professional headshot for the report</small>
+                        <div id="agent-photo-preview" class="file-preview"></div>
+                    </div>
+                    <div class="file-upload-group">
+                        <label for="agent-video">Personal Video Message:</label>
+                        <input type="file" id="agent-video" accept="video/*" />
+                        <small>Upload your personal video message to the vendor</small>
+                        <div id="agent-video-preview" class="file-preview"></div>
+                    </div>
                 </div>
 
                 <!-- Report Data -->

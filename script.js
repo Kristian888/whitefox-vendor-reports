@@ -15,6 +15,7 @@ class VendorReportPlatform {
             if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                 e.preventDefault();
                 this.showAdminPanel();
+                this.setupFileUploads();
             }
         });
 
@@ -604,6 +605,102 @@ class VendorReportPlatform {
                     </div>
                 </div>
             `;
+        }
+    }
+
+    setupFileUploads() {
+        // Setup agent photo upload
+        const agentPhotoInput = document.getElementById('agent-photo');
+        if (agentPhotoInput) {
+            agentPhotoInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        // Create preview
+                        const preview = document.getElementById('agent-photo-preview');
+                        if (preview) {
+                            preview.innerHTML = `
+                                <div style="margin-top: 10px;">
+                                    <img src="${event.target.result}" style="max-width: 150px; max-height: 150px; object-fit: cover; border-radius: 8px; border: 2px solid #ddd;" alt="Agent Photo Preview">
+                                    <p style="font-size: 12px; color: #666; margin-top: 5px;">✅ Photo uploaded successfully</p>
+                                </div>
+                            `;
+                        }
+                        
+                        // Store for report display
+                        localStorage.setItem('agentPhoto', event.target.result);
+                        
+                        // Update agent section if it exists
+                        const agentSection = document.querySelector('.agent-message img');
+                        if (agentSection) {
+                            agentSection.src = event.target.result;
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Setup agent video upload
+        const agentVideoInput = document.getElementById('agent-video');
+        if (agentVideoInput) {
+            agentVideoInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        // Create preview
+                        const preview = document.getElementById('agent-video-preview');
+                        if (preview) {
+                            preview.innerHTML = `
+                                <div style="margin-top: 10px;">
+                                    <video controls style="max-width: 250px; max-height: 140px; border-radius: 8px;" src="${event.target.result}"></video>
+                                    <p style="font-size: 12px; color: #666; margin-top: 5px;">✅ Video message uploaded successfully</p>
+                                </div>
+                            `;
+                        }
+                        
+                        // Store for report display
+                        localStorage.setItem('agentVideo', event.target.result);
+                        
+                        // Update agent video section if it exists
+                        const agentVideo = document.querySelector('.agent-video-message video');
+                        if (agentVideo) {
+                            agentVideo.src = event.target.result;
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Load existing uploads from localStorage
+        const savedPhoto = localStorage.getItem('agentPhoto');
+        const savedVideo = localStorage.getItem('agentVideo');
+        
+        if (savedPhoto) {
+            const preview = document.getElementById('agent-photo-preview');
+            if (preview) {
+                preview.innerHTML = `
+                    <div style="margin-top: 10px;">
+                        <img src="${savedPhoto}" style="max-width: 150px; max-height: 150px; object-fit: cover; border-radius: 8px; border: 2px solid #ddd;" alt="Agent Photo">
+                        <p style="font-size: 12px; color: #666; margin-top: 5px;">Current agent photo</p>
+                    </div>
+                `;
+            }
+        }
+
+        if (savedVideo) {
+            const preview = document.getElementById('agent-video-preview');
+            if (preview) {
+                preview.innerHTML = `
+                    <div style="margin-top: 10px;">
+                        <video controls style="max-width: 250px; max-height: 140px; border-radius: 8px;" src="${savedVideo}"></video>
+                        <p style="font-size: 12px; color: #666; margin-top: 5px;">Current video message</p>
+                    </div>
+                `;
+            }
         }
     }
 }
