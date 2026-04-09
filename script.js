@@ -630,12 +630,6 @@ class VendorReportPlatform {
                         
                         // Store for report display
                         localStorage.setItem('agentPhoto', event.target.result);
-                        
-                        // Update agent section if it exists
-                        const agentSection = document.querySelector('.agent-message img');
-                        if (agentSection) {
-                            agentSection.src = event.target.result;
-                        }
                     };
                     reader.readAsDataURL(file);
                 }
@@ -663,12 +657,6 @@ class VendorReportPlatform {
                         
                         // Store for report display
                         localStorage.setItem('agentVideo', event.target.result);
-                        
-                        // Update agent video section if it exists
-                        const agentVideo = document.querySelector('.agent-video-message video');
-                        if (agentVideo) {
-                            agentVideo.src = event.target.result;
-                        }
                     };
                     reader.readAsDataURL(file);
                 }
