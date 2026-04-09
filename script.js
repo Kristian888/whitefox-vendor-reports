@@ -120,8 +120,10 @@ class VendorReportPlatform {
     updateReportContent(data) {
         // Update property info
         const addressElement = document.querySelector('.property-address');
-        if (addressElement && data.address) {
-            addressElement.textContent = data.address;
+        const titleElement = document.getElementById('property-title');
+        if (data.address) {
+            if (addressElement) addressElement.textContent = data.address;
+            if (titleElement) titleElement.textContent = data.address;
         }
 
         // Update campaign performance
